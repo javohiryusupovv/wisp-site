@@ -42,9 +42,9 @@ export const site = {
   refundDays: 14,
   legalUpdated: "2026-10-05",
 
-  // TODO: your X handle (without @) and contact email
+  // TODO: your X handle (without @)
   xHandle: "",
-  email: "hello@example.com",
+  email: "yusupovjavoxir11@gmail.com",
 } as const;
 
 export const money = (n: number) => `$${Number.isInteger(n) ? n : n.toFixed(2)}`;
