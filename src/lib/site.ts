@@ -32,11 +32,7 @@ export const site = {
 
   version: "1.0.7",
 
-  // Buyers get access through private GitHub repos (invite sent by /api/lemonsqueezy after payment).
-  github: {
-    macRepo: "https://github.com/wisp-widgets/wisp-mac",
-    windowsRepo: "https://github.com/wisp-widgets/wisp-windows",
-  },  minMacOS: "14.0",
+ minMacOS: "14.0",
 
   // Shown on the Refund and Terms pages. TODO: confirm both before launch.
   refundDays: 14,

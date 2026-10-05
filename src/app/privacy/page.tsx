@@ -25,14 +25,14 @@ export default function Privacy() {
       <p>
         Checkout is run by Lemon Squeezy, our merchant of record. They collect your name, email, payment details and
         country to process the order and taxes, under their own privacy policy. We receive your name, email and order
-        details so we can deliver Wisp and help you. We don&apos;t see your card number.
+        details so we can deliver Wisp, unlock updates and help you. We don&apos;t see your card number.
       </p>
 
-      <h2>The GitHub invitation</h2>
+      <h2>Your purchase email and updates</h2>
       <p>
-        When your payment goes through, we ask GitHub to send an invitation to the email address you paid with, for the
-        private repository of the app you bought. GitHub handles the invitation and your account under its own privacy
-        policy. If you get a refund, a pending invitation is cancelled and your access is removed.
+        To check for updates, the app sends the email you bought Wisp with to our server. The server asks Lemon Squeezy
+        whether that email has a paid order and, if so, returns a link to the latest version. We don&apos;t store the email
+        or keep a log of it.
       </p>
 
       <h2>What stays on your computer</h2>
@@ -44,7 +44,7 @@ export default function Privacy() {
 
       <h2>Every request the app makes</h2>
       <ul>
-        <li><b>Updates:</b> every few hours Wisp asks the private GitHub repository whether a new version is out, using the GitHub sign-in you approved in the app, and downloads it when you click the update button.</li>
+        <li><b>Updates:</b> every few hours Wisp sends your purchase email to wisp-mac.vercel.app to ask whether a new version is out, and downloads it when you click the update button.</li>
         <li><b>Prayer times:</b> Wisp downloads the monthly timetable for your city from namozvaqti.uz. Only the city name is part of the request.</li>
         <li><b>Your location (optional):</b> if you choose &quot;current location&quot; for prayer times, macOS gives Wisp an approximate location, accurate to about a kilometre. Wisp calculates the times on your Mac and asks Apple&apos;s geocoder for the place name.</li>
         <li><b>YouTube:</b> when a YouTube video is playing, Wisp loads that video&apos;s thumbnail and preview from YouTube to show it as the cover.</li>

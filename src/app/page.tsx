@@ -44,15 +44,15 @@ const specs = [
   { k: "Requirements", v: "macOS 14 Sonoma or later" },
   { k: "Windows", v: "Windows 10 (2004 or later) and 11, x64. Now playing, Telegram unread count and alerts, file shelf, timer, prayer times for your location, clipboard history with images and files, quick controls and a volume indicator. Top, left or right edge on any display. Telegram message text, the live YouTube cover and Liquid Glass are Mac-only for now." },
   { k: "Processor", v: "Apple Silicon and Intel (universal app)" },
-  { k: "Delivery", v: "Through a private GitHub repository: GitHub emails you an invitation right after you pay. Mac: 3.7 MB disk image, signed. Windows: 67 MB zip with a single Wisp.exe." },
+  { k: "Delivery", v: "A download link by email right after payment. Mac: 3.7 MB disk image, signed. Windows: 67 MB zip with a single Wisp.exe." },
   { k: "Displays", v: "MacBook notch and any external monitor. At the top, or on the left or right edge." },
   { k: "Music", v: "Spotify, Apple Music, YouTube, YouTube Music and Yandex Music in Safari, Chrome-based and Firefox-based browsers, plus any app that reports what's playing" },
   { k: "Messages", v: "Telegram: sender and text in the notch, unread count" },
   { k: "Prayer times", v: "Official Uzbekistan table near 15 cities, calculated from your location anywhere else. Reminders 30 and 20 minutes before." },
   { k: "Tools", v: "File shelf, timer, clipboard history (60 items, text and images), quick controls, volume and brightness indicator, charging indicator" },
-  { k: "Updates", v: "In the app, one click. Each download's signature is checked before install." },
+  { k: "Updates", v: "In the app, one click, after you enter your purchase email once. Each download's signature is checked before install." },
   { k: "Permissions", v: "Automation, Full Disk Access, Accessibility. All optional, each unlocks one feature." },
-  { k: "Account", v: "A free GitHub account, used only to deliver Wisp and its updates. Everything else runs on your computer." },
+  { k: "Account", v: "None. Your purchase email unlocks updates." },
   { k: "Built with", v: "Swift and SwiftUI" },
 ];
 

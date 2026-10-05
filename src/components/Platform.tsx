@@ -58,15 +58,9 @@ export function BuyButtons({ serverNow, onDark = false, compact = false }: { ser
   );
 }
 
-/** Small line under the buy buttons: how delivery works, and where buyers download. */
+/** Small line under the buy buttons: how delivery works. */
 export function DownloadLinks() {
-  const { macRepo, windowsRepo } = site.github;
-  return (
-    <p className="dl-link">
-      After payment you&apos;ll get a GitHub invitation by email. Accept it to download Wisp
-      {macRepo && windowsRepo ? <> for <a href={`${macRepo}/releases/latest`}>Mac</a> or <a href={`${windowsRepo}/releases/latest`}>Windows</a></> : null}.
-    </p>
-  );
+  return <p className="dl-link">After payment you&apos;ll get a download link by email.</p>;
 }
 
 /** Context for visitors who aren't on a Mac: what Windows gets, or how to send the page to a computer. */

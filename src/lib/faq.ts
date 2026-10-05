@@ -8,11 +8,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "How do I get Wisp after paying?",
-    a: `Right after payment GitHub emails you an invitation, sent to the address you paid with. Accept it (sign in, or create a free GitHub account) and download the latest release from the private Wisp repository. Updates come from the same place. The invitation is valid for 7 days: if it expires or doesn't arrive, email ${site.email} with your order number and we'll send a new one.`,
-  },
-  {
-    q: "Do I need a GitHub account?",
-    a: "Yes, a free one. Wisp is delivered and updated through a private GitHub repository. If you don't have an account, the invitation email lets you create one in a minute.",
+    a: "Right after payment you get an email with a download link. The same link is on the order page linked in your receipt, so you can download again any time.",
   },
   {
     q: "Is there a Windows version?",
@@ -32,11 +28,11 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "How do updates work?",
-    a: "Wisp checks for new versions every few hours. When one is out, a green button appears in the notch. Click it and Wisp installs the update and reopens.",
+    a: "Enter the email you bought Wisp with once in the app. Wisp then checks for new versions every few hours. When one is out, a green button appears in the notch: click it and Wisp installs the update and reopens.",
   },
   {
     q: "Is any of my data sent anywhere?",
-    a: "No. What you play, read and copy is handled on your Mac and never sent to us. Wisp only goes online to check for updates, fetch prayer times, and load the preview of a YouTube video you're playing. The Privacy page lists every request.",
+    a: "No. What you play, read and copy is handled on your Mac and never sent to us. Wisp only goes online to check for updates (with your purchase email), fetch prayer times, and load the preview of a YouTube video you're playing. The Privacy page lists every request.",
   },
   {
     q: "Can I get a refund?",

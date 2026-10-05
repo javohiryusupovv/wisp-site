@@ -27,9 +27,9 @@ export default function Terms() {
       <h2>Your license and access</h2>
       <ul>
         <li>Wisp for Mac and Wisp for Windows are sold separately. Each purchase gives you a personal license to use that version on computers you own or use.</li>
-        <li>Wisp is delivered through a private GitHub repository. After payment, GitHub emails an invitation to the address you paid with. Accept it with a free GitHub account to download. Invitations expire after 7 days; we&apos;ll send a new one on request.</li>
-        <li>The license doesn&apos;t expire. Every 1.x update is included and arrives through the same repository.</li>
-        <li>Don&apos;t share your repository access, and don&apos;t redistribute or resell the app or its downloads.</li>
+        <li>After payment you get a download link by email. Updates arrive in the app once you enter the email you bought with.</li>
+        <li>The license doesn&apos;t expire. Every 1.x update is included.</li>
+        <li>Don&apos;t share your purchase email for updates, and don&apos;t redistribute or resell the app or its downloads.</li>
       </ul>
 
       <h2>Refunds</h2>

@@ -27,7 +27,7 @@ export default function Refund() {
       <ul>
         <li>We process refund requests within 2 business days.</li>
         <li>The money goes back to the payment method you used. Depending on your bank, it can take 5–10 business days to appear.</li>
-        <li>Your access to the private GitHub repository is removed once the refund is issued.</li>
+        <li>Once the refund is issued, your purchase email no longer unlocks updates.</li>
       </ul>
 
       <h2>Who processes the payment</h2>

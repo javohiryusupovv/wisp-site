@@ -25,24 +25,17 @@ Hostingda `NEXT_PUBLIC_SITE_URL` ni o'rnating (masalan `https://wisp.app`). Unda
 - `src/app/page.tsx` — JSON-LD (`SoftwareApplication` + narx, `FAQPage`)
 - `robots.ts`, `sitemap.ts`, `manifest.ts`, `opengraph-image.png`, `twitter-image.png`, ikonkalar — `src/app/` ichida
 
-## Sotuv: to'lov → yopiq GitHub repo
+## Sotuv va yangilanishlar
 
-1. Xaridor Buy bosadi va to'g'ridan-to'g'ri Lemon Squeezy checkout'iga o'tadi.
-2. To'lovdan keyin Lemon Squeezy `POST /api/lemonsqueezy` ga webhook yuboradi. Sayt GitHub'dan xaridor to'lagan
-   emailga org taklifini yuborishni so'raydi (mahsulotiga mos team bilan: Mac yoki Windows). GitHub emailni o'zi yuboradi.
-3. Xaridor taklifni qabul qiladi (GitHub'ga kiradi yoki akkaunt ochadi) va repo'dan yuklab oladi.
-4. Refund (`order_refunded`): kutilayotgan taklif bekor qilinadi. Taklif allaqachon qabul qilingan bo'lsa — logda
-   yoziladi, team'dan qo'lda chiqarish kerak (GitHub email bo'yicha a'zoni topib bermaydi).
+- **Xarid:** Buy → Lemon Squeezy checkout. To'lovdan keyin Lemon Squeezy mahsulotga yuklangan faylning
+  yuklab olish havolasini emailga o'zi yuboradi (Wisp-mac.dmg / Wisp-Windows.zip).
+- **Yangilanishlar:** ilovaga xarid emaili bir marta kiritiladi. Ilova `POST /api/update` ga
+  `{"platform":"mac"|"windows","email":"…"}` yuboradi. Sayt Lemon Squeezy API orqali shu emailda o'sha
+  platforma uchun to'langan, refund qilinmagan buyurtma borligini tekshiradi va yopiq repo'dagi oxirgi relizning
+  qisqa muddatli yuklab olish havolasini qaytaradi: `{"version","notes","url","size"}`.
+  Xatolar: 400 `bad_request`, 403 `no_purchase`, 429 `rate_limited`, 500 `server`.
 
-Cheklovlar:
-- Taklif 7 kunda eskiradi. Qayta yuborish: GitHub → wisp-widgets → People → Invitations / Invite member (o'sha email, o'sha team).
-- Email allaqachon org a'zosiga tegishli bo'lsa (masalan, ikkinchi mahsulotni keyinroq sotib olgan), GitHub email bo'yicha
-  team qo'sha olmaydi — logda yoziladi, qo'lda qo'shiladi.
-
-Sozlash:
-- GitHub: org `wisp-widgets`, private repo'lar, **Read** huquqli team'lar, org owner classic tokeni (`admin:org`).
-- Lemon Squeezy → Settings → Webhooks: URL `https://<sayt>/api/lemonsqueezy`, eventlar `order_created`, `order_refunded`, signing secret.
-- Hosting env: `.env.example` dagi o'zgaruvchilar.
-- `src/lib/site.ts`: `checkout.mac` / `checkout.windows`.
+Env (Vercel): `LEMONSQUEEZY_API_KEY`, `GITHUB_TOKEN` (wisp-widgets/wisp-mac va wisp-windows'ni o'qiy oladigan),
+`PRODUCT_MAC_ID`, `PRODUCT_WINDOWS_ID`, ixtiyoriy `LEMONSQUEEZY_STORE_ID`.
 
 Narx: launch paytida mahsulot narxi $5, `launchEndsAt` dan keyin Lemon Squeezy'da $10.90 ga o'zgartiriladi.
