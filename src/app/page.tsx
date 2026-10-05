@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock, FloatBar, Reveal } from "@/components/Client";
 import { LaunchPill, Price, PriceBlock } from "@/components/Launch";
-import { ClipboardTab, ControlsTab, LiveTimer, Notch, NotchProvider, NotchSwitch, OpenTab, PrayerShowcase, TelegramBubble, VideoCover } from "@/components/Notch";
+import { ClipboardTab, ControlsTab, LiveTimer, ShelfTab, Notch, NotchProvider, NotchSwitch, OpenTab, PrayerShowcase, TelegramBubble, VideoCover } from "@/components/Notch";
 import { SunMax, TelegramLogo, YouTubeLogo } from "@/components/sf";
 import { MonitorDemo } from "@/components/Monitor";
 import { NotchHint, PlatformNote } from "@/components/Platform";
@@ -43,12 +43,12 @@ const specs = [
   { k: "Price", v: `${money(site.launchPrice)} until ${launchEnds.toLocaleDateString("en-US", { month: "long", day: "numeric", timeZone: "Asia/Tashkent" })}, then ${money(site.regularPrice)}. Pay once, every 1.x update included.` },
   { k: "Requirements", v: "macOS 14 Sonoma or later" },
   { k: "Processor", v: "Apple Silicon and Intel (universal app)" },
-  { k: "Download", v: "3.3 MB disk image, signed" },
+  { k: "Download", v: "3.5 MB disk image, signed" },
   { k: "Displays", v: "MacBook notch and any external monitor. At the top, or on the left or right edge." },
   { k: "Music", v: "Spotify, Apple Music, YouTube, YouTube Music and Yandex Music in Safari, Chrome-based and Firefox-based browsers, plus any app that reports what's playing" },
   { k: "Messages", v: "Telegram: sender and text in the notch, unread count" },
   { k: "Prayer times", v: "Official Uzbekistan table near 15 cities, calculated from your location anywhere else. Reminders 30 and 20 minutes before." },
-  { k: "Tools", v: "Timer, clipboard history (60 items, text and images), quick controls, volume and brightness indicator, charging indicator" },
+  { k: "Tools", v: "File shelf, timer, clipboard history (60 items, text and images), quick controls, volume and brightness indicator, charging indicator" },
   { k: "Updates", v: "In the app, one click. Each download's signature is checked before install." },
   { k: "Permissions", v: "Automation, Full Disk Access, Accessibility. All optional, each unlocks one feature." },
   { k: "Account", v: "None. Everything runs on your Mac." },
@@ -65,7 +65,7 @@ const included = [
   "Music from apps and browser tabs",
   "Telegram messages in the notch",
   "Prayer times with reminders",
-  "Timer, clipboard history, quick controls",
+  "File shelf, timer, clipboard history, quick controls",
   "Volume, brightness and charging indicators",
   "Works on any display, with or without a notch",
   "In-app updates",
@@ -224,27 +224,34 @@ export default function Home() {
               </article>
 
               <article className="card wide rv">
+                <div className="stage" aria-hidden="true">
+                  <div className="card-panel"><ShelfTab /></div>
+                </div>
+                <div><h3>File shelf</h3><p>Drag a file onto the notch to park it there, then drag it out into any app later. The file itself stays where it is.</p><OpenTab tab="shelf">Open the shelf</OpenTab></div>
+              </article>
+
+              <article className="card wide rv">
                 <div className="stage" style={{ alignItems: "flex-start" }} aria-hidden="true">
                   <div className="mini" style={{ width: 260 }}><div className="ears"><span className="mini-art"><VideoCover small /><span className="yt"><YouTubeLogo height={8} /></span></span><span className="update-pill">↓ 1.0.4</span></div></div>
                 </div>
                 <div><h3>Updates in one click</h3><p>When a new version is out, a green button appears in the notch. Click it and Wisp downloads the update, checks its signature, installs it and reopens.</p></div>
               </article>
 
-              <article className="card wide rv">
+              <article className="card rv">
                 <div className="stage" style={{ alignItems: "flex-start" }} aria-hidden="true">
                   <div className="mini" style={{ width: 220 }}><div className="ears"><span className="bolt-dot"><BoltIcon style={{ width: 11, height: 11, fill: "#000" }} /></span><span className="val" style={{ color: "#33D966" }}>82%</span></div></div>
                 </div>
                 <div><h3>Charging</h3><p>Plug in and the notch shows the battery level for a moment.</p></div>
               </article>
 
-              <article className="card wide rv">
+              <article className="card rv">
                 <div className="stage" style={{ alignItems: "center" }} aria-hidden="true">
                   <div className="cal-demo"><span className="wd">MON</span><span className="dd">5</span><span className="mm">Oct</span></div>
                 </div>
                 <div><h3>Date and unread count</h3><p>Next to the player: today&apos;s date and how many Telegram messages you haven&apos;t read.</p><OpenTab tab="home">Open home</OpenTab></div>
               </article>
 
-              <article className="card wide rv">
+              <article className="card rv">
                 <div className="stage" style={{ alignItems: "center" }} aria-hidden="true">
                   <span className="mono" style={{ fontSize: 44, fontWeight: 500, letterSpacing: "-.04em" }}>Swift</span>
                 </div>

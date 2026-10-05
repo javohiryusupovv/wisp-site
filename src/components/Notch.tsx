@@ -287,9 +287,25 @@ export function ControlsTab() {
   );
 }
 
-function ShelfTab() {
+export function ShelfTab() {
+  const files = [
+    { name: "Invoice-October.pdf", kind: "pdf" },
+    { name: "hero@2x.png", kind: "img" },
+    { name: "launch-notes.md", kind: "doc" },
+    { name: "Wisp-1.0.4.dmg", kind: "dmg" },
+  ];
   return (
-    <div className="soon"><I.Tray size={26} /><b>File shelf</b><span>Coming soon</span></div>
+    <div className="shelf">
+      <div className="head"><b>File shelf</b><span className="n">{files.length}</span><span className="sp" /><span className="clear">Clear</span></div>
+      <div className="files">
+        {files.map((f) => (
+          <div key={f.name} className="file">
+            <span className={`ficon ${f.kind}`}>{f.kind === "img" ? "" : f.kind.toUpperCase()}</span>
+            <span className="fname">{f.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 

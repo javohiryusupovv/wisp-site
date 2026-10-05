@@ -352,9 +352,22 @@ img { display: block; max-width: 100%; }
 :is(.notch, .card-panel) .controls .tiles { width: 202px; display: grid; grid-template-columns: repeat(3, 62px); gap: 8px; }
 .tile { height: 54px; border-radius: 14px; background: rgba(255,255,255,.1); display: grid; place-items: center; align-content: center; gap: 4px; color: #fff; }
 .tile small { font: 500 10px/1 var(--body); color: rgba(255,255,255,.8); }
-.soon { height: 100%; display: grid; place-content: center; justify-items: center; gap: 6px; color: rgba(255,255,255,.35); }
-.soon b { font: 600 14px/1 var(--body); color: #fff; }
-.soon span { font: 400 12px/1 var(--body); color: rgba(255,255,255,.45); }
+/* file shelf tab */
+.shelf { height: 100%; display: flex; flex-direction: column; gap: 8px; }
+.shelf .head { display: flex; align-items: center; gap: 6px; padding: 0 4px; }
+.shelf .head b { font: 600 12px/1 var(--body); }
+.shelf .head .n { font: 700 10px/1 var(--body); padding: 2px 6px; border-radius: 99px; background: rgba(255,255,255,.12); }
+.shelf .head .sp { flex: 1; }
+.shelf .head .clear { font: 500 11px/1 var(--body); color: rgba(255,255,255,.55); }
+.shelf .files { flex: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.shelf .file { display: grid; justify-items: center; align-content: center; gap: 7px; padding: 8px 4px; border-radius: 12px; background: rgba(255,255,255,.05); }
+.shelf .ficon { width: 34px; height: 42px; border-radius: 5px; display: grid; place-items: end center; padding-bottom: 5px; font: 800 8px/1 var(--body); color: #fff; letter-spacing: .04em; background: linear-gradient(#6b7280, #4b5563); clip-path: polygon(0 0, 70% 0, 100% 22%, 100% 100%, 0 100%); }
+.shelf .ficon.pdf { background: linear-gradient(#ff5a5f, #d92d3a); }
+.shelf .ficon.img { background: linear-gradient(135deg, #3D7BFF, #E26BFF); }
+.shelf .ficon.doc { background: linear-gradient(#4f8cff, #2f5fd8); }
+.shelf .ficon.dmg { background: linear-gradient(#a3a7b4, #6f7383); }
+.shelf .fname { max-width: 100%; font: 500 10.5px/1.25 var(--body); color: rgba(255,255,255,.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
 
 /* Liquid Glass bubble that drops out from behind the notch */
 .bubble {

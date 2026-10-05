@@ -27,7 +27,7 @@ export const site = {
   // TODO: checkout link (Gumroad / Lemon Squeezy / Paddle). Update the product price there on the same date.
   checkoutUrl: "https://github.com/javohiryusupovv/wisp/releases/latest",
 
-  version: "1.0.3",
+  version: "1.0.4",
   minMacOS: "14.0",
 
   // Shown on the Refund and Terms pages. TODO: confirm both before launch.
