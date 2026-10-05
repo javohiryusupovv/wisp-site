@@ -8,6 +8,12 @@ export const AppleIcon = (p: P) => (
   </svg>
 );
 
+export const WindowsIcon = (p: P) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...p}>
+    <path d="M3 5.1 10.4 4v7.2H3zM11.4 3.9 21 2.5v8.7h-9.6zM3 12.2h7.4v7.2L3 18.3zM11.4 12.2H21v8.7l-9.6-1.4z" />
+  </svg>
+);
+
 export const TimerIcon = (p: P) => (
   <svg className="timer-ico" viewBox="0 0 24 24" fill="none" stroke="#FF9F0A" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true" {...p}>
     <circle cx="12" cy="13" r="8" />

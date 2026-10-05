@@ -494,6 +494,13 @@ h1 .cut {
   font: 600 13px/1 var(--body);
 }
 
+.platform-note.win { display: block; text-align: left; padding: 14px 16px; }
+.platform-note.win p { margin: 0; }
+.platform-note.win p.small { margin-top: 6px; font-size: 13px; color: var(--ink-3); }
+.platform-note.win b { color: var(--ink); font-weight: 600; }
+.dl-link { margin: 10px 0 0; font-size: 14px; color: var(--ink-3); }
+.dl-link a { color: var(--violet); font-weight: 600; }
+
 /* demo switcher */
 .hero .hint { display: flex; justify-content: center; margin-top: 48px; }
 .switch {

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
-import { ArrowUpIcon } from "./icons";
+import { useState, useSyncExternalStore, type ReactNode } from "react";
+import { site } from "@/lib/site";
+import { ArrowUpIcon, WindowsIcon } from "./icons";
 
 type Platform = "mac" | "windows" | "mobile" | "other";
 
@@ -18,7 +19,7 @@ function detect(): Platform {
 
 const noop = () => () => {};
 /** null on the server and during hydration, then the real platform. */
-const usePlatform = () => useSyncExternalStore<Platform | null>(noop, detect, () => null);
+export const usePlatform = () => useSyncExternalStore<Platform | null>(noop, detect, () => null);
 
 const hoverable = () => window.matchMedia("(hover: hover)").matches;
 const useHoverable = () => useSyncExternalStore(noop, hoverable, () => true);
@@ -34,13 +35,52 @@ export function NotchHint() {
   );
 }
 
-/** Wisp is Mac-only. Visitors on Windows or a phone get told so, with a way to send the page to their Mac. */
+/**
+ * The hero / closing call to action. Mac visitors (and the server render) get the Mac button passed in;
+ * Windows visitors get the Windows download instead.
+ */
+export function PlatformCTA({ mac }: { mac: ReactNode }) {
+  const platform = usePlatform();
+  if (platform !== "windows") return <>{mac}</>;
+  return (
+    <a className="btn btn-primary" href={site.downloads.windows}>
+      <WindowsIcon />
+      Download for Windows
+    </a>
+  );
+}
+
+/** Small line under the hero buttons for Mac visitors who already bought. */
+export function MacDownloadLink() {
+  const platform = usePlatform();
+  if (platform !== "mac") return null;
+  return (
+    <p className="dl-link">
+      Already bought? <a href={site.downloads.mac}>Download for Mac</a>
+    </p>
+  );
+}
+
+/** Context for visitors who aren't on a Mac: what Windows gets, or how to send the page to a computer. */
 export function PlatformNote() {
   const platform = usePlatform();
   const [copied, setCopied] = useState(false);
-  if (platform !== "windows" && platform !== "mobile" && platform !== "other") return null;
+  if (platform === "windows") {
+    return (
+      <div className="platform-note win" role="note">
+        <p>
+          <b>Wisp for Windows 10 and 11</b> has now playing, the timer, prayer times, clipboard history, volume,
+          brightness and battery. Telegram messages, the file shelf and Liquid Glass are Mac-only for now.
+        </p>
+        <p className="small">
+          It&apos;s a single Wisp.exe that installs itself. If Windows says the app is from an unknown publisher, choose
+          More info → Run anyway.
+        </p>
+      </div>
+    );
+  }
+  if (platform !== "mobile" && platform !== "other") return null;
 
-  const where = platform === "windows" ? "on Windows" : platform === "mobile" ? "on your phone" : "not on a Mac";
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(window.location.origin);
@@ -53,7 +93,7 @@ export function PlatformNote() {
 
   return (
     <p className="platform-note" role="note">
-      You&apos;re {where}. Wisp is a Mac app: you can buy it here and download it on your Mac.
+      Wisp runs on Mac and Windows. Open this page on your computer to get it.
       <button type="button" onClick={copy}>{copied ? "Link copied" : "Copy link"}</button>
     </p>
   );

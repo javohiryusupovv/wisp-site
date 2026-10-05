@@ -5,7 +5,7 @@ import { LaunchPill, Price, PriceBlock } from "@/components/Launch";
 import { ClipboardTab, ControlsTab, LiveTimer, ShelfTab, Notch, NotchProvider, NotchSwitch, OpenTab, PrayerShowcase, TelegramBubble, VideoCover } from "@/components/Notch";
 import { SunMax, TelegramLogo, YouTubeLogo } from "@/components/sf";
 import { MonitorDemo } from "@/components/Monitor";
-import { NotchHint, PlatformNote } from "@/components/Platform";
+import { MacDownloadLink, NotchHint, PlatformCTA, PlatformNote } from "@/components/Platform";
 import { AppleIcon, BoltIcon, CheckIcon, Eq } from "@/components/icons";
 import { faq } from "@/lib/faq";
 import { isLaunch, launchEnds, money, renderTime, site } from "@/lib/site";
@@ -42,8 +42,9 @@ const screenModes = [
 const specs = [
   { k: "Price", v: `${money(site.launchPrice)} until ${launchEnds.toLocaleDateString("en-US", { month: "long", day: "numeric", timeZone: "Asia/Tashkent" })}, then ${money(site.regularPrice)}. Pay once, every 1.x update included.` },
   { k: "Requirements", v: "macOS 14 Sonoma or later" },
+  { k: "Windows", v: "Windows 10 (2004 or later) and 11, x64. Now playing, timer, prayer times, clipboard history, volume, brightness and battery. Telegram, file shelf and Liquid Glass are Mac-only for now." },
   { k: "Processor", v: "Apple Silicon and Intel (universal app)" },
-  { k: "Download", v: "3.5 MB disk image, signed" },
+  { k: "Download", v: "Mac: 3.7 MB disk image, signed. Windows: 63 MB zip with a single Wisp.exe" },
   { k: "Displays", v: "MacBook notch and any external monitor. At the top, or on the left or right edge." },
   { k: "Music", v: "Spotify, Apple Music, YouTube, YouTube Music and Yandex Music in Safari, Chrome-based and Firefox-based browsers, plus any app that reports what's playing" },
   { k: "Messages", v: "Telegram: sender and text in the notch, unread count" },
@@ -155,13 +156,18 @@ export default function Home() {
               messaging, and what&apos;s ticking. It stays out of the way until you need it.
             </p>
             <div className="ctas">
-              <a className="btn btn-primary" href={buy}>
-                <AppleIcon />
-                Get Wisp for Mac <Price serverNow={now} />
-              </a>
+              <PlatformCTA
+                mac={
+                  <a className="btn btn-primary" href={buy}>
+                    <AppleIcon />
+                    Get Wisp for Mac <Price serverNow={now} />
+                  </a>
+                }
+              />
               <a className="btn btn-ghost" href="#features">See what it does</a>
             </div>
-            <p className="meta">macOS 14+ · Apple Silicon &amp; Intel · Works on Macs without a notch</p>
+            <MacDownloadLink />
+            <p className="meta">macOS 14+ · Apple Silicon &amp; Intel · Works on Macs without a notch · Also on Windows</p>
             <PlatformNote />
             <NotchHint />
             <NotchSwitch />
@@ -368,7 +374,7 @@ export default function Home() {
             <Image className="logo" src="/brand/wisp-logo.png" alt="Wisp logo" width={1683} height={725} />
             <h2>Give your notch something to do.</h2>
             <div className="ctas">
-              <a className="btn btn-primary" href={buy}>Get Wisp for Mac <Price serverNow={now} /></a>
+              <PlatformCTA mac={<a className="btn btn-primary" href={buy}>Get Wisp for Mac <Price serverNow={now} /></a>} />
             </div>
           </div>
           <div className="foot">
