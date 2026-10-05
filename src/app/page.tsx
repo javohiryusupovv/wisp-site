@@ -328,7 +328,7 @@ export default function Home() {
               <div className="glow" />
               <div className="l" style={{ position: "relative" }}>
                 <PriceBlock serverNow={now} />
-                <BuyButtons serverNow={now} onDark />
+                <BuyButtons serverNow={now} onDark compact />
               </div>
               <div className="r" style={{ position: "relative" }}>
                 <ul className="incl">

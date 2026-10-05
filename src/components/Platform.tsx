@@ -40,23 +40,23 @@ export function NotchHint() {
  * Two buy buttons, Mac and Windows. The visitor's own platform comes first and gets the primary style;
  * the server render (and phones) lead with Mac.
  */
-export function BuyButtons({ serverNow, onDark = false }: { serverNow: number; onDark?: boolean }) {
+export function BuyButtons({ serverNow, onDark = false, compact = false }: { serverNow: number; onDark?: boolean; compact?: boolean }) {
   const platform = usePlatform();
   const windowsFirst = platform === "windows";
   const mac = (primary: boolean) => (
-    <a key="mac" className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={site.checkout.mac}>
+    <a key="mac" className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={site.checkout.mac} aria-label="Get Wisp for Mac">
       <AppleIcon />
-      Get Wisp for Mac {primary && <Price serverNow={serverNow} />}
+      {compact ? "Mac" : "Get Wisp for Mac"} <Price serverNow={serverNow} />
     </a>
   );
   const win = (primary: boolean) => (
-    <a key="win" className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={site.checkout.windows}>
+    <a key="win" className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={site.checkout.windows} aria-label="Get Wisp for Windows">
       <WindowsIcon />
-      Get Wisp for Windows {primary && <Price serverNow={serverNow} />}
+      {compact ? "Windows" : "Get Wisp for Windows"} <Price serverNow={serverNow} />
     </a>
   );
   return (
-    <div className={`ctas buy-pair${onDark ? " on-dark" : ""}`}>
+    <div className={`ctas buy-pair${onDark ? " on-dark" : ""}${compact ? " compact" : ""}`}>
       {windowsFirst ? [win(true), mac(false)] : [mac(true), win(false)]}
     </div>
   );

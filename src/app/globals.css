@@ -450,7 +450,7 @@ h1 .cut {
   font: 600 16px/1 var(--body); text-decoration: none;
   transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s;
 }
-.btn svg { width: 18px; height: 18px; }
+.btn svg { width: 18px; height: 18px; flex: none; }
 .btn-primary { background: var(--ink); color: #fff; box-shadow: 0 10px 30px -12px rgba(11,11,20,.6); }
 .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 16px 36px -14px rgba(11,11,20,.7); }
 .btn-primary .price { padding-left: 10px; margin-left: 2px; border-left: 1px solid rgba(255,255,255,.22); font-weight: 500; opacity: .8; }
@@ -499,7 +499,12 @@ h1 .cut {
 .platform-note.win p.small { margin-top: 6px; font-size: 13px; color: var(--ink-3); }
 .platform-note.win b { color: var(--ink); font-weight: 600; }
 /* the Mac / Windows buy pair */
-.buy-pair .btn { min-width: 0; }
+.buy-pair .btn { min-width: 0; white-space: nowrap; }
+.buy-pair .btn-ghost .price { padding-left: 10px; margin-left: 2px; border-left: 1px solid var(--line); font-weight: 500; opacity: .8; }
+.buy-pair.on-dark .btn-ghost .price { border-left-color: rgba(255, 255, 255, .2); }
+/* pricing card: two equal buttons side by side */
+.buy-pair.compact { flex-wrap: nowrap; gap: 10px; }
+.buy-pair.compact .btn { flex: 1 1 0; justify-content: center; padding: 15px 14px; }
 .price-card .buy-pair { justify-content: flex-start; margin-top: 0; }
 .buy-pair.on-dark .btn-primary { background: #fff; color: #000; box-shadow: none; }
 .buy-pair.on-dark .btn-primary .price { border-left-color: rgba(0, 0, 0, .18); }
@@ -913,6 +918,8 @@ footer { padding: clamp(100px, 14vw, 160px) 0 48px; }
 }
 @media (max-width: 640px) {
   .menubar .hide-sm { display: none; }
+  .buy-pair.compact { flex-wrap: wrap; }
+  .buy-pair.compact .btn { flex-basis: 100%; }
   .spec { grid-template-columns: 1fr; gap: 4px; }
   .screen-modes { grid-template-columns: 1fr; }
   .key .cap { width: 72px; height: 62px; }
