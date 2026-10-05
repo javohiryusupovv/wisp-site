@@ -8,7 +8,7 @@ import { MonitorDemo } from "@/components/Monitor";
 import { BuyButtons, DownloadLinks, NotchHint, PlatformNote } from "@/components/Platform";
 import { BoltIcon, CheckIcon, Eq } from "@/components/icons";
 import { faq } from "@/lib/faq";
-import { isLaunch, launchEnds, money, renderTime, site } from "@/lib/site";
+import { money, renderTime, site } from "@/lib/site";
 
 // Re-render hourly so the HTML (and structured data) picks up the price change after launch week.
 export const revalidate = 3600;
@@ -40,7 +40,7 @@ const screenModes = [
 ];
 
 const specs = [
-  { k: "Price", v: `${money(site.launchPrice)} until ${launchEnds.toLocaleDateString("en-US", { month: "long", day: "numeric", timeZone: "Asia/Tashkent" })}, then ${money(site.regularPrice)}. Pay once, every 1.x update included.` },
+  { k: "Price", v: `${money(site.regularPrice)}, pay once. Launch: 50% off (${money(site.launchPrice)}) for the first ${site.launchSpots} buyers. Every 1.x update included.` },
   { k: "Requirements", v: "macOS 14 Sonoma or later" },
   { k: "Windows", v: "Windows 10 (2004 or later) and 11, x64. Now playing, Telegram unread count and alerts, file shelf, timer, prayer times for your location, clipboard history with images and files, quick controls and a volume indicator. Top, left or right edge on any display. Telegram message text, the live YouTube cover and Liquid Glass are Mac-only for now." },
   { k: "Processor", v: "Apple Silicon and Intel (universal app)" },
@@ -72,8 +72,7 @@ const included = [
   "In-app updates",
 ];
 
-function JsonLd({ now }: { now: number }) {
-  const launch = isLaunch(now);
+function JsonLd() {
   const data = {
     "@context": "https://schema.org",
     "@graph": [
@@ -88,11 +87,10 @@ function JsonLd({ now }: { now: number }) {
         softwareVersion: site.version,
         offers: {
           "@type": "Offer",
-          price: launch ? site.launchPrice : site.regularPrice,
+          price: site.regularPrice,
           priceCurrency: site.currency,
           url: `${site.url}/#pricing`,
           availability: "https://schema.org/InStock",
-          ...(launch && { priceValidUntil: launchEnds.toISOString().slice(0, 10) }),
         },
       },
       {
@@ -118,7 +116,7 @@ export default function Home() {
 
   return (
     <NotchProvider serverNow={now}>
-      <JsonLd now={now} />
+      <JsonLd />
       <Reveal />
 
       {/* macOS-style menu bar; the live notch hangs in the middle of it */}
@@ -140,7 +138,7 @@ export default function Home() {
       </header>
 
       {/* floating site navbar, detached from the top edge */}
-      <FloatBar serverNow={now} />
+      <FloatBar />
 
       <Notch />
 
@@ -148,13 +146,13 @@ export default function Home() {
         {/* ───────────── Hero ───────────── */}
         <section className="hero">
           <div className="wrap">
-            <LaunchPill serverNow={now} />
+            <LaunchPill />
             <h1>Your <span className="cut">notch</span>, finally useful.</h1>
             <p className="lede">
               Wisp turns the black cutout on your MacBook into a live island for what&apos;s playing, who&apos;s
               messaging, and what&apos;s ticking. It stays out of the way until you need it.
             </p>
-            <BuyButtons serverNow={now} />
+            <BuyButtons />
             <DownloadLinks />
             <p className="meta">macOS 14+ · Windows 10 and 11 · Works on screens without a notch</p>
             <PlatformNote />
@@ -327,8 +325,8 @@ export default function Home() {
             <div className="price-card rv">
               <div className="glow" />
               <div className="l" style={{ position: "relative" }}>
-                <PriceBlock serverNow={now} />
-                <BuyButtons serverNow={now} onDark compact />
+                <PriceBlock />
+                <BuyButtons onDark compact />
               </div>
               <div className="r" style={{ position: "relative" }}>
                 <ul className="incl">
@@ -362,7 +360,7 @@ export default function Home() {
           <div className="finale rv">
             <Image className="logo" src="/brand/wisp-logo.png" alt="Wisp logo" width={1683} height={725} />
             <h2>Give your notch something to do.</h2>
-            <BuyButtons serverNow={now} onDark />
+            <BuyButtons onDark />
           </div>
           <div className="foot">
             <span>© 2026 Wisp · Made in Uzbekistan</span>

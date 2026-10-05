@@ -473,13 +473,11 @@ h1 .cut {
 .price s { opacity: .55; font-weight: 400; margin-left: 4px; }
 .launch-tag { display: inline-block; margin: 0 0 14px; padding: 6px 10px; border-radius: 99px; background: var(--green); color: #000; font: 600 12px/1 var(--body); text-transform: uppercase; letter-spacing: .04em; }
 .amount small s { margin-right: 6px; }
-.countdown { display: flex; gap: 8px; margin: -8px 0 28px; }
-.countdown span {
-  display: grid; justify-items: center; gap: 6px; min-width: 62px;
-  padding: 10px 8px; border-radius: 14px; background: rgba(255, 255, 255, .08);
-  font: 400 11px/1 var(--body); color: rgba(255, 255, 255, .55); text-transform: uppercase; letter-spacing: .05em;
-}
-.countdown b { font: 500 26px/1 var(--mono); font-variant-numeric: tabular-nums; color: #fff; letter-spacing: -.02em; }
+.spots { display: grid; gap: 10px; margin: -6px 0 28px; max-width: 26rem; }
+.spots .cells { display: grid; grid-template-columns: repeat(20, 1fr); gap: 4px; }
+.spots .cells i { height: 10px; border-radius: 3px; background: rgba(51, 217, 102, .9); box-shadow: 0 0 8px rgba(51, 217, 102, .35); }
+.spots .cells i.taken { background: rgba(255, 255, 255, .14); box-shadow: none; }
+.spots .mono { font-size: 13px; color: rgba(255, 255, 255, .7); }
 
 /* shown to visitors who aren't on a Mac */
 .platform-note {
@@ -504,7 +502,10 @@ h1 .cut {
 .buy-pair.on-dark .btn-ghost .price { border-left-color: rgba(255, 255, 255, .2); }
 /* pricing card: two equal buttons side by side */
 .buy-pair.compact { flex-wrap: nowrap; gap: 10px; }
-.buy-pair.compact .btn { flex: 1 1 0; justify-content: center; padding: 15px 14px; }
+.buy-pair.compact .btn { flex: 1 1 0; justify-content: center; padding: 15px 10px; gap: 8px; }
+.buy-pair.compact .btn .price { padding-left: 8px; }
+/* the card above already shows the struck-through price */
+.buy-pair.compact .btn .price s { display: none; }
 .price-card .buy-pair { justify-content: flex-start; margin-top: 0; }
 .buy-pair.on-dark .btn-primary { background: #fff; color: #000; box-shadow: none; }
 .buy-pair.on-dark .btn-primary .price { border-left-color: rgba(0, 0, 0, .18); }

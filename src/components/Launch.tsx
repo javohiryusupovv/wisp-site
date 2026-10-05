@@ -1,21 +1,40 @@
 "use client";
 
-import { useNow } from "./useNow";
-import { isLaunch, launchEnds, money, site } from "@/lib/site";
+import { useSyncExternalStore } from "react";
+import { money, site } from "@/lib/site";
 
-function left(now: number) {
-  const ms = Math.max(0, launchEnds.getTime() - now);
-  const s = Math.floor(ms / 1000);
-  return { d: Math.floor(s / 86400), h: Math.floor((s % 86400) / 3600), m: Math.floor((s % 3600) / 60), s: s % 60 };
+/** Launch offer state from /api/launch. `remaining: null` = not known yet (server render, or Lemon Squeezy unreachable). */
+export type Launch = { active: boolean; total: number; remaining: number | null };
+
+const initial: Launch = { active: true, total: site.launchSpots, remaining: null };
+let state = initial;
+let started = false;
+const listeners = new Set<() => void>();
+
+function subscribe(fn: () => void) {
+  listeners.add(fn);
+  if (!started) {
+    started = true;
+    fetch("/api/launch")
+      .then((r) => r.json())
+      .then((s: Launch) => {
+        state = s;
+        listeners.forEach((l) => l());
+      })
+      .catch(() => {});
+  }
+  return () => {
+    listeners.delete(fn);
+  };
 }
 
-const endDate = launchEnds.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "Asia/Tashkent" });
-const pad = (n: number) => String(n).padStart(2, "0");
+/** Shared across every price on the page; fetched once. */
+export const useLaunch = () => useSyncExternalStore(subscribe, () => state, () => initial);
 
-/** "$5 $10.90" — current price, with the regular price struck through during launch. */
-export function Price({ serverNow }: { serverNow: number }) {
-  const now = useNow(serverNow, 30000);
-  if (!isLaunch(now)) return <span className="price">{money(site.regularPrice)}</span>;
+/** "$4.99 $9.99" during the launch, "$9.99" after. */
+export function Price() {
+  const { active } = useLaunch();
+  if (!active) return <span className="price">{money(site.regularPrice)}</span>;
   return (
     <span className="price">
       {money(site.launchPrice)} <s aria-label={`regular price ${money(site.regularPrice)}`}>{money(site.regularPrice)}</s>
@@ -23,25 +42,26 @@ export function Price({ serverNow }: { serverNow: number }) {
   );
 }
 
-/** Pill above the headline. Hidden once the launch is over. */
-export function LaunchPill({ serverNow }: { serverNow: number }) {
-  const now = useNow(serverNow, 30000);
-  if (!isLaunch(now)) return null;
-  const t = left(now);
+const left = (l: Launch) => (l.remaining === null ? `${l.total} spots` : `${l.remaining} of ${l.total} left`);
+
+/** Pill above the headline. Hidden once the spots are gone. */
+export function LaunchPill() {
+  const l = useLaunch();
+  if (!l.active) return null;
   return (
     <a className="launch-pill" href="#pricing">
       <span className="dot" aria-hidden="true" />
-      Launch price {money(site.launchPrice)} until {endDate}
+      Launch: half price for the first {l.total} buyers
       <span className="sep" aria-hidden="true">·</span>
-      <span className="mono">{t.d > 0 ? `${t.d}d ${t.h}h left` : `${t.h}h ${t.m}m left`}</span>
+      <span className="mono">{left(l)}</span>
     </a>
   );
 }
 
-/** Big price block in the pricing card, with a live countdown. */
-export function PriceBlock({ serverNow }: { serverNow: number }) {
-  const now = useNow(serverNow);
-  if (!isLaunch(now)) {
+/** Big price block in the pricing card, with a meter of the launch spots. */
+export function PriceBlock() {
+  const l = useLaunch();
+  if (!l.active) {
     return (
       <>
         <div className="amount">{money(site.regularPrice)}<small>one-time</small></div>
@@ -49,22 +69,23 @@ export function PriceBlock({ serverNow }: { serverNow: number }) {
       </>
     );
   }
-  const t = left(now);
+  const taken = l.remaining === null ? 0 : l.total - l.remaining;
   return (
     <>
-      <p className="launch-tag">Launch price</p>
+      <p className="launch-tag">Launch · 50% off</p>
       <div className="amount">
         {money(site.launchPrice)}
         <small><s>{money(site.regularPrice)}</s> one-time</small>
       </div>
       <p className="note">
-        Goes up to {money(site.regularPrice)} on {endDate}. No subscription and no account. Every 1.x update is included, with a {site.refundDays}-day money-back guarantee.
+        Half price for the first {l.total} buyers, then {money(site.regularPrice)}. No subscription and no account. Every 1.x
+        update is included, with a {site.refundDays}-day money-back guarantee.
       </p>
-      <div className="countdown" role="timer" aria-label={`${t.d} days ${t.h} hours ${t.m} minutes left at the launch price`}>
-        <span><b>{t.d}</b>days</span>
-        <span><b>{pad(t.h)}</b>hours</span>
-        <span><b>{pad(t.m)}</b>min</span>
-        <span><b>{pad(t.s)}</b>sec</span>
+      <div className="spots" role="img" aria-label={l.remaining === null ? `${l.total} launch spots` : `${l.remaining} of ${l.total} launch spots left`}>
+        <div className="cells" aria-hidden="true">
+          {Array.from({ length: l.total }, (_, i) => <i key={i} className={i < taken ? "taken" : ""} />)}
+        </div>
+        <span className="mono">{left(l)}</span>
       </div>
     </>
   );

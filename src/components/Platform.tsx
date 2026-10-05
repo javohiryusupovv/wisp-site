@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
-import { site } from "@/lib/site";
+import { checkoutUrl } from "@/lib/site";
 import { AppleIcon, ArrowUpIcon, WindowsIcon } from "./icons";
-import { Price } from "./Launch";
+import { Price, useLaunch } from "./Launch";
 
 type Platform = "mac" | "windows" | "mobile" | "other";
 
@@ -40,15 +40,16 @@ export function NotchHint() {
  * Two buy buttons, Mac and Windows. The visitor's own platform comes first and gets the primary style;
  * the server render (and phones) lead with Mac. Each goes straight to its Lemon Squeezy checkout.
  */
-export function BuyButtons({ serverNow, onDark = false, compact = false }: { serverNow: number; onDark?: boolean; compact?: boolean }) {
+export function BuyButtons({ onDark = false, compact = false }: { onDark?: boolean; compact?: boolean }) {
   const platform = usePlatform();
+  const { active } = useLaunch();
   const windowsFirst = platform === "windows";
   const button = (product: "mac" | "windows", primary: boolean) => (
-    <a key={product} className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={site.checkout[product]}
+    <a key={product} className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={checkoutUrl(product, active)}
       aria-label={product === "mac" ? "Get Wisp for Mac" : "Get Wisp for Windows"}>
       {product === "mac" ? <AppleIcon /> : <WindowsIcon />}
       {compact ? (product === "mac" ? "Mac" : "Windows") : product === "mac" ? "Get Wisp for Mac" : "Get Wisp for Windows"}{" "}
-      <Price serverNow={serverNow} />
+      <Price />
     </a>
   );
   return (
