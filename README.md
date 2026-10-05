@@ -24,3 +24,20 @@ Hostingda `NEXT_PUBLIC_SITE_URL` ni o'rnating (masalan `https://wisp.app`). Unda
 - `src/app/layout.tsx` — title, description, Open Graph, X kartasi, robots
 - `src/app/page.tsx` — JSON-LD (`SoftwareApplication` + narx, `FAQPage`)
 - `robots.ts`, `sitemap.ts`, `manifest.ts`, `opengraph-image.png`, `twitter-image.png`, ikonkalar — `src/app/` ichida
+
+## Sotuv: to'lov → yopiq GitHub repo
+
+1. Xaridor Buy bosadi va GitHub username kiritadi. Sayt username borligini tekshiradi va
+   `checkout[custom][github]=<username>` bilan Lemon Squeezy checkout'iga o'tkazadi.
+2. To'lovdan keyin Lemon Squeezy `POST /api/lemonsqueezy` ga webhook yuboradi.
+   Sayt xaridorni mahsulotiga mos GitHub team'ga qo'shadi (Mac yoki Windows). GitHub taklif emailini o'zi yuboradi.
+3. Refund bo'lsa (`order_refunded`) — team'dan chiqariladi.
+
+Sozlash:
+- GitHub: org, ikkita private repo (Mac, Windows), har biriga **Read** huquqli team, org owner tokeni (`admin:org`).
+- Lemon Squeezy → Settings → Webhooks: URL `https://<sayt>/api/lemonsqueezy`, eventlar `order_created`, `order_refunded`, signing secret.
+- Hosting env: `.env.example` dagi hamma o'zgaruvchilar.
+- `src/lib/site.ts`: `checkout.mac` / `checkout.windows` (Lemon Squeezy "Share" havolasi) va `github.macRepo` / `github.windowsRepo`.
+
+Narx: launch paytida mahsulot narxi $5, `launchEndsAt` dan keyin Lemon Squeezy'da $10.90 ga o'zgartiriladi.
+

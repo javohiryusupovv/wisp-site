@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function Terms() {
-  const limit: number = site.activationLimit;
-  const macs = limit === 1 ? "one computer" : `up to ${limit} computers`;
   return (
     <LegalPage title="Terms of service">
       <p>
@@ -26,13 +24,12 @@ export default function Terms() {
       </p>
       <p>Prices are shown in US dollars. Taxes may be added at checkout depending on where you live.</p>
 
-      <h2>Your license</h2>
+      <h2>Your license and access</h2>
       <ul>
-        <li>Wisp for Mac and Wisp for Windows are sold separately. Each purchase gives you a personal license for that version on {macs} that you own or use.</li>
-        <li>The license doesn&apos;t expire. Every 1.x update is included.</li>
-        <li>You get a license key with your receipt. Wisp asks for it once on each computer.</li>
-        <li>Don&apos;t share, resell or publish your license key, and don&apos;t redistribute the app.</li>
-        <li>Don&apos;t modify Wisp or work around its license check.</li>
+        <li>Wisp for Mac and Wisp for Windows are sold separately. Each purchase gives you a personal license to use that version on computers you own or use.</li>
+        <li>Wisp is delivered through a private GitHub repository. After payment, the GitHub account you entered at checkout is invited to it. You need a free GitHub account.</li>
+        <li>The license doesn&apos;t expire. Every 1.x update is included and arrives through the same repository.</li>
+        <li>Don&apos;t share your repository access, and don&apos;t redistribute or resell the app or its downloads.</li>
       </ul>
 
       <h2>Refunds</h2>

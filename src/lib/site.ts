@@ -24,7 +24,7 @@ export const site = {
   regularPrice: 10.9,
   launchEndsAt: "2026-10-15T23:59:59+05:00", // Tashkent time
   currency: "USD",
-  // TODO: Lemon Squeezy checkout links, one product per platform (add ?checkout[discount_code]=LAUNCH for the launch price).
+  // TODO: Lemon Squeezy checkout links ("Share" on each product). The buyer's GitHub username is added as checkout[custom][github].
   checkout: {
     mac: "#pricing",
     windows: "#pricing",
@@ -32,16 +32,15 @@ export const site = {
 
   version: "1.0.6",
 
-  // Stable names: release.sh uploads these with every release.
-  downloads: {
-    mac: "https://github.com/javohiryusupovv/wisp/releases/latest/download/Wisp-mac.dmg",
-    windows: "https://github.com/javohiryusupovv/wisp/releases/latest/download/Wisp-Windows.zip",
-  },
-  minMacOS: "14.0",
+  // Buyers get access through private GitHub repos (invite sent by /api/lemonsqueezy after payment).
+  // TODO: set once the org and repos exist.
+  github: {
+    macRepo: "", // e.g. "https://github.com/wisp-app/wisp-mac"
+    windowsRepo: "", // e.g. "https://github.com/wisp-app/wisp-windows"
+  },  minMacOS: "14.0",
 
   // Shown on the Refund and Terms pages. TODO: confirm both before launch.
   refundDays: 14,
-  activationLimit: 2, // Macs per license (set the same limit on the Lemon Squeezy product)
   legalUpdated: "2026-10-05",
 
   // TODO: your X handle (without @) and contact email

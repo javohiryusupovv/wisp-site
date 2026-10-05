@@ -7,6 +7,14 @@ export const faq: { q: string; a: string }[] = [
     a: "Yes. Put Wisp at the top of the screen or on the left or right edge, on any display, including external monitors.",
   },
   {
+    q: "How do I get Wisp after paying?",
+    a: "Before checkout you enter your GitHub username. Right after you pay, GitHub emails you an invite to the private Wisp repository. Accept it and download the latest release. Updates come from the same place.",
+  },
+  {
+    q: "Do I need a GitHub account?",
+    a: "Yes, a free one. Wisp is delivered and updated through a private GitHub repository, so we need an account to invite. Creating one takes a minute at github.com/signup.",
+  },
+  {
     q: "Is there a Windows version?",
     a: "Yes, for Windows 10 and 11. It has now playing, Telegram unread alerts, the file shelf, timer, prayer times, clipboard history, quick controls and a volume indicator, at the top or on either edge of any display. Windows doesn't let apps read notification text, so Telegram shows the unread count instead of the message. The live YouTube cover and Liquid Glass are Mac-only for now.",
   },
@@ -28,7 +36,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "Is any of my data sent anywhere?",
-    a: "No. What you play, read and copy is handled on your Mac and never sent to us. Wisp only goes online to check for updates, fetch prayer times, load the preview of a YouTube video you're playing, and verify your license. The Privacy page lists every request.",
+    a: "No. What you play, read and copy is handled on your Mac and never sent to us. Wisp only goes online to check for updates, fetch prayer times, and load the preview of a YouTube video you're playing. The Privacy page lists every request.",
   },
   {
     q: "Can I get a refund?",

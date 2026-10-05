@@ -3,6 +3,7 @@
 import { useState, useSyncExternalStore } from "react";
 import { site } from "@/lib/site";
 import { AppleIcon, ArrowUpIcon, WindowsIcon } from "./icons";
+import { CheckoutDialog, type Product } from "./Checkout";
 import { Price } from "./Launch";
 
 type Platform = "mac" | "windows" | "mobile" | "other";
@@ -38,35 +39,37 @@ export function NotchHint() {
 
 /**
  * Two buy buttons, Mac and Windows. The visitor's own platform comes first and gets the primary style;
- * the server render (and phones) lead with Mac.
+ * the server render (and phones) lead with Mac. Each opens the GitHub-username step before checkout.
  */
 export function BuyButtons({ serverNow, onDark = false, compact = false }: { serverNow: number; onDark?: boolean; compact?: boolean }) {
   const platform = usePlatform();
+  const [open, setOpen] = useState<Product | null>(null);
   const windowsFirst = platform === "windows";
-  const mac = (primary: boolean) => (
-    <a key="mac" className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={site.checkout.mac} aria-label="Get Wisp for Mac">
-      <AppleIcon />
-      {compact ? "Mac" : "Get Wisp for Mac"} <Price serverNow={serverNow} />
-    </a>
-  );
-  const win = (primary: boolean) => (
-    <a key="win" className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={site.checkout.windows} aria-label="Get Wisp for Windows">
-      <WindowsIcon />
-      {compact ? "Windows" : "Get Wisp for Windows"} <Price serverNow={serverNow} />
-    </a>
+  const button = (product: Product, primary: boolean) => (
+    <button key={product} type="button" className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} onClick={() => setOpen(product)}
+      aria-label={product === "mac" ? "Get Wisp for Mac" : "Get Wisp for Windows"}>
+      {product === "mac" ? <AppleIcon /> : <WindowsIcon />}
+      {compact ? (product === "mac" ? "Mac" : "Windows") : product === "mac" ? "Get Wisp for Mac" : "Get Wisp for Windows"}{" "}
+      <Price serverNow={serverNow} />
+    </button>
   );
   return (
-    <div className={`ctas buy-pair${onDark ? " on-dark" : ""}${compact ? " compact" : ""}`}>
-      {windowsFirst ? [win(true), mac(false)] : [mac(true), win(false)]}
-    </div>
+    <>
+      <div className={`ctas buy-pair${onDark ? " on-dark" : ""}${compact ? " compact" : ""}`}>
+        {windowsFirst ? [button("windows", true), button("mac", false)] : [button("mac", true), button("windows", false)]}
+      </div>
+      <CheckoutDialog product={open} onClose={() => setOpen(null)} />
+    </>
   );
 }
 
 /** Small line under the buy buttons for people who already bought. */
 export function DownloadLinks() {
+  const { macRepo, windowsRepo } = site.github;
   return (
     <p className="dl-link">
-      Already bought? Download for <a href={site.downloads.mac}>Mac</a> or <a href={site.downloads.windows}>Windows</a>
+      Already bought? Accept the GitHub invite from your email
+      {macRepo && windowsRepo ? <>, then download for <a href={`${macRepo}/releases/latest`}>Mac</a> or <a href={`${windowsRepo}/releases/latest`}>Windows</a></> : null}.
     </p>
   );
 }

@@ -25,10 +25,17 @@ export default function Privacy() {
       <p>
         Checkout is run by Lemon Squeezy, our merchant of record. They collect your name, email, payment details and
         country to process the order and taxes, under their own privacy policy. We receive your name, email and order
-        details so we can send your license and help you. We don&apos;t see your card number.
+        details so we can deliver Wisp and help you. We don&apos;t see your card number.
       </p>
 
-      <h2>What stays on your Mac</h2>
+      <h2>Your GitHub username</h2>
+      <p>
+        You enter your GitHub username before checkout. We pass it to Lemon Squeezy with your order and use it once
+        payment goes through, to invite that account to the private repository where Wisp is published. GitHub sends the
+        invite email. If you get a refund, the access is removed.
+      </p>
+
+      <h2>What stays on your computer</h2>
       <ul>
         <li>Clipboard history, settings and cached prayer timetables are stored only on your Mac.</li>
         <li>Telegram message text is read from your Mac&apos;s notifications to show it in the notch. It isn&apos;t stored or sent anywhere.</li>
@@ -37,11 +44,10 @@ export default function Privacy() {
 
       <h2>Every request the app makes</h2>
       <ul>
-        <li><b>Updates:</b> every few hours Wisp asks GitHub whether a new version is out, and downloads it when you click the update button.</li>
+        <li><b>Updates:</b> every few hours Wisp asks the private GitHub repository whether a new version is out, using the GitHub sign-in you approved in the app, and downloads it when you click the update button.</li>
         <li><b>Prayer times:</b> Wisp downloads the monthly timetable for your city from namozvaqti.uz. Only the city name is part of the request.</li>
         <li><b>Your location (optional):</b> if you choose &quot;current location&quot; for prayer times, macOS gives Wisp an approximate location, accurate to about a kilometre. Wisp calculates the times on your Mac and asks Apple&apos;s geocoder for the place name.</li>
         <li><b>YouTube:</b> when a YouTube video is playing, Wisp loads that video&apos;s thumbnail and preview from YouTube to show it as the cover.</li>
-        <li><b>License:</b> when you enter your license key, Wisp sends the key and your Mac&apos;s name to Lemon Squeezy to activate it, and checks it again from time to time.</li>
       </ul>
 
       <h2>Permissions</h2>
