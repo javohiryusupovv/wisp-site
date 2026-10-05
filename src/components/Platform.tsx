@@ -3,7 +3,6 @@
 import { useState, useSyncExternalStore } from "react";
 import { site } from "@/lib/site";
 import { AppleIcon, ArrowUpIcon, WindowsIcon } from "./icons";
-import { CheckoutDialog, type Product } from "./Checkout";
 import { Price } from "./Launch";
 
 type Platform = "mac" | "windows" | "mobile" | "other";
@@ -39,37 +38,33 @@ export function NotchHint() {
 
 /**
  * Two buy buttons, Mac and Windows. The visitor's own platform comes first and gets the primary style;
- * the server render (and phones) lead with Mac. Each opens the GitHub-username step before checkout.
+ * the server render (and phones) lead with Mac. Each goes straight to its Lemon Squeezy checkout.
  */
 export function BuyButtons({ serverNow, onDark = false, compact = false }: { serverNow: number; onDark?: boolean; compact?: boolean }) {
   const platform = usePlatform();
-  const [open, setOpen] = useState<Product | null>(null);
   const windowsFirst = platform === "windows";
-  const button = (product: Product, primary: boolean) => (
-    <button key={product} type="button" className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} onClick={() => setOpen(product)}
+  const button = (product: "mac" | "windows", primary: boolean) => (
+    <a key={product} className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={site.checkout[product]}
       aria-label={product === "mac" ? "Get Wisp for Mac" : "Get Wisp for Windows"}>
       {product === "mac" ? <AppleIcon /> : <WindowsIcon />}
       {compact ? (product === "mac" ? "Mac" : "Windows") : product === "mac" ? "Get Wisp for Mac" : "Get Wisp for Windows"}{" "}
       <Price serverNow={serverNow} />
-    </button>
+    </a>
   );
   return (
-    <>
-      <div className={`ctas buy-pair${onDark ? " on-dark" : ""}${compact ? " compact" : ""}`}>
-        {windowsFirst ? [button("windows", true), button("mac", false)] : [button("mac", true), button("windows", false)]}
-      </div>
-      <CheckoutDialog product={open} onClose={() => setOpen(null)} />
-    </>
+    <div className={`ctas buy-pair${onDark ? " on-dark" : ""}${compact ? " compact" : ""}`}>
+      {windowsFirst ? [button("windows", true), button("mac", false)] : [button("mac", true), button("windows", false)]}
+    </div>
   );
 }
 
-/** Small line under the buy buttons for people who already bought. */
+/** Small line under the buy buttons: how delivery works, and where buyers download. */
 export function DownloadLinks() {
   const { macRepo, windowsRepo } = site.github;
   return (
     <p className="dl-link">
-      Already bought? Accept the GitHub invite from your email
-      {macRepo && windowsRepo ? <>, then download for <a href={`${macRepo}/releases/latest`}>Mac</a> or <a href={`${windowsRepo}/releases/latest`}>Windows</a></> : null}.
+      After payment you&apos;ll get a GitHub invitation by email. Accept it to download Wisp
+      {macRepo && windowsRepo ? <> for <a href={`${macRepo}/releases/latest`}>Mac</a> or <a href={`${windowsRepo}/releases/latest`}>Windows</a></> : null}.
     </p>
   );
 }

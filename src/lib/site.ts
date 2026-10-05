@@ -24,7 +24,7 @@ export const site = {
   regularPrice: 10.9,
   launchEndsAt: "2026-10-15T23:59:59+05:00", // Tashkent time
   currency: "USD",
-  // TODO: Lemon Squeezy checkout links ("Share" on each product). The buyer's GitHub username is added as checkout[custom][github].
+  // TODO: Lemon Squeezy checkout links ("Share" on each product).
   checkout: {
     mac: "#pricing",
     windows: "#pricing",

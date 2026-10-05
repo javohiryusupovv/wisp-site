@@ -28,11 +28,11 @@ export default function Privacy() {
         details so we can deliver Wisp and help you. We don&apos;t see your card number.
       </p>
 
-      <h2>Your GitHub username</h2>
+      <h2>The GitHub invitation</h2>
       <p>
-        You enter your GitHub username before checkout. We pass it to Lemon Squeezy with your order and use it once
-        payment goes through, to invite that account to the private repository where Wisp is published. GitHub sends the
-        invite email. If you get a refund, the access is removed.
+        When your payment goes through, we ask GitHub to send an invitation to the email address you paid with, for the
+        private repository of the app you bought. GitHub handles the invitation and your account under its own privacy
+        policy. If you get a refund, a pending invitation is cancelled and your access is removed.
       </p>
 
       <h2>What stays on your computer</h2>

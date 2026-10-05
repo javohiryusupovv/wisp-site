@@ -8,11 +8,11 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "How do I get Wisp after paying?",
-    a: "Before checkout you enter your GitHub username. Right after you pay, GitHub emails you an invite to the private Wisp repository. Accept it and download the latest release. Updates come from the same place.",
+    a: `Right after payment GitHub emails you an invitation, sent to the address you paid with. Accept it (sign in, or create a free GitHub account) and download the latest release from the private Wisp repository. Updates come from the same place. The invitation is valid for 7 days: if it expires or doesn't arrive, email ${site.email} with your order number and we'll send a new one.`,
   },
   {
     q: "Do I need a GitHub account?",
-    a: "Yes, a free one. Wisp is delivered and updated through a private GitHub repository, so we need an account to invite. Creating one takes a minute at github.com/signup.",
+    a: "Yes, a free one. Wisp is delivered and updated through a private GitHub repository. If you don't have an account, the invitation email lets you create one in a minute.",
   },
   {
     q: "Is there a Windows version?",
