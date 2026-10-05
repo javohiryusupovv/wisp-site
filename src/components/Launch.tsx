@@ -45,7 +45,7 @@ export function PriceBlock({ serverNow }: { serverNow: number }) {
     return (
       <>
         <div className="amount">{money(site.regularPrice)}<small>one-time</small></div>
-        <p className="note">No subscription and no account. Every 1.x update is included.</p>
+        <p className="note">No subscription and no account. Every 1.x update is included, with a {site.refundDays}-day money-back guarantee.</p>
       </>
     );
   }
@@ -58,7 +58,7 @@ export function PriceBlock({ serverNow }: { serverNow: number }) {
         <small><s>{money(site.regularPrice)}</s> one-time</small>
       </div>
       <p className="note">
-        Goes up to {money(site.regularPrice)} on {endDate}. No subscription and no account. Every 1.x update is included.
+        Goes up to {money(site.regularPrice)} on {endDate}. No subscription and no account. Every 1.x update is included, with a {site.refundDays}-day money-back guarantee.
       </p>
       <div className="countdown" role="timer" aria-label={`${t.d} days ${t.h} hours ${t.m} minutes left at the launch price`}>
         <span><b>{t.d}</b>days</span>

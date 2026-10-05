@@ -30,6 +30,11 @@ export const site = {
   version: "1.0.3",
   minMacOS: "14.0",
 
+  // Shown on the Refund and Terms pages. TODO: confirm both before launch.
+  refundDays: 14,
+  activationLimit: 2, // Macs per license (set the same limit on the Lemon Squeezy product)
+  legalUpdated: "2026-10-05",
+
   // TODO: your X handle (without @) and contact email
   xHandle: "",
   email: "hello@example.com",

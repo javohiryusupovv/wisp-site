@@ -1,3 +1,5 @@
+import { site } from "./site";
+
 // Used both for the FAQ section and the FAQPage structured data.
 export const faq: { q: string; a: string }[] = [
   {
@@ -22,6 +24,10 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "Is any of my data sent anywhere?",
-    a: "No. What you play, read and copy is handled on your Mac. Wisp only goes online to check for updates and to fetch prayer times, if you turn them on.",
+    a: "No. What you play, read and copy is handled on your Mac and never sent to us. Wisp only goes online to check for updates, fetch prayer times, load the preview of a YouTube video you're playing, and verify your license. The Privacy page lists every request.",
+  },
+  {
+    q: "Can I get a refund?",
+    a: `Yes. Email us within ${site.refundDays} days of buying and you'll get your money back. No reason needed.`,
   },
 ];

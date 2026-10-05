@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Clock, FloatBar, Reveal } from "@/components/Client";
 import { LaunchPill, Price, PriceBlock } from "@/components/Launch";
 import { ClipboardTab, ControlsTab, LiveTimer, Notch, NotchProvider, NotchSwitch, OpenTab, PrayerShowcase, TelegramBubble, VideoCover } from "@/components/Notch";
@@ -342,7 +343,7 @@ export default function Home() {
             <p className="eyebrow rv">FAQ</p>
             <h2 id="faq-h" className="rv">Questions</h2>
             <div className="faq rv">
-              {[faq.slice(0, 3), faq.slice(3)].map((col, i) => (
+              {[faq.slice(0, Math.ceil(faq.length / 2)), faq.slice(Math.ceil(faq.length / 2))].map((col, i) => (
                 <div key={i}>
                   {col.map((f) => (
                     <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>
@@ -367,6 +368,7 @@ export default function Home() {
             <span>© 2026 Wisp · Made in Uzbekistan</span>
             <span>
               {site.xHandle && <><a href={`https://x.com/${site.xHandle}`}>Follow on X</a> · </>}
+              <Link href="/refund">Refund</Link> · <Link href="/terms">Terms</Link> · <Link href="/privacy">Privacy</Link> ·{" "}
               <a href={`mailto:${site.email}`}>Email</a>
             </span>
           </div>
