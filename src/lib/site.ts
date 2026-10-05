@@ -33,10 +33,9 @@ export const site = {
   version: "1.0.6",
 
   // Buyers get access through private GitHub repos (invite sent by /api/lemonsqueezy after payment).
-  // TODO: set once the org and repos exist.
   github: {
-    macRepo: "", // e.g. "https://github.com/wisp-app/wisp-mac"
-    windowsRepo: "", // e.g. "https://github.com/wisp-app/wisp-windows"
+    macRepo: "https://github.com/wisp-widgets/wisp-mac",
+    windowsRepo: "https://github.com/wisp-widgets/wisp-windows",
   },  minMacOS: "14.0",
 
   // Shown on the Refund and Terms pages. TODO: confirm both before launch.
