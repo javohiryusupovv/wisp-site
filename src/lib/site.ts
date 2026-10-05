@@ -24,13 +24,13 @@ export const site = {
   regularPrice: 10.9,
   launchEndsAt: "2026-10-15T23:59:59+05:00", // Tashkent time
   currency: "USD",
-  // TODO: Lemon Squeezy checkout links ("Share" on each product).
+  // Lemon Squeezy checkout links ("Share" on each product).
   checkout: {
-    mac: "#pricing",
-    windows: "#pricing",
+    mac: "https://wispapp.lemonsqueezy.com/checkout/buy/242c6429-d2b0-486a-8438-c48e5bb31813",
+    windows: "https://wispapp.lemonsqueezy.com/checkout/buy/1f3debbd-3a21-4a4e-8404-b1dcdfb407f6",
   },
 
-  version: "1.0.7",
+  version: "1.0.8",
 
  minMacOS: "14.0",
 
