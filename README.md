@@ -27,15 +27,20 @@ Hostingda `NEXT_PUBLIC_SITE_URL` ni o'rnating (masalan `https://wisp.app`). Unda
 
 ## Sotuv va yangilanishlar
 
-- **Xarid:** Buy → Lemon Squeezy checkout. To'lovdan keyin Lemon Squeezy mahsulotga yuklangan faylning
-  yuklab olish havolasini emailga o'zi yuboradi (Wisp-mac.dmg / Wisp-Windows.zip).
+- **Xarid:** Buy → Mac yoki Windows uchun alohida Lemon Squeezy checkout.
+- **Yuklab olish:** chek emailidagi (va tasdiqlash oynasidagi) tugma
+  `https://wisp-mac.vercel.app/download?order=[order_id]&key=[order_identifier]` ga olib boradi.
+  Sayt Lemon Squeezy API orqali buyurtma to'langan va refund qilinmaganini, `key` buyurtmaning UUID'iga mosligini
+  tekshiradi va yopiq repo'dagi oxirgi relizning qisqa muddatli GitHub havolasiga yo'naltiradi
+  (Mac: `Wisp-mac.dmg`, Windows: `Wisp-Windows.zip`). Xaridorga GitHub akkaunti kerak emas.
+  Muammo bo'lsa — `/download/help?reason=…` sahifasi.
 - **Yangilanishlar:** ilovaga xarid emaili bir marta kiritiladi. Ilova `POST /api/update` ga
-  `{"platform":"mac"|"windows","email":"…"}` yuboradi. Sayt Lemon Squeezy API orqali shu emailda o'sha
-  platforma uchun to'langan, refund qilinmagan buyurtma borligini tekshiradi va yopiq repo'dagi oxirgi relizning
-  qisqa muddatli yuklab olish havolasini qaytaradi: `{"version","notes","url","size"}`.
+  `{"platform":"mac"|"windows","email":"…"}` yuboradi → `{"version","notes","url","size"}`.
   Xatolar: 400 `bad_request`, 403 `no_purchase`, 429 `rate_limited`, 500 `server`.
 
-Env (Vercel): `LEMONSQUEEZY_API_KEY`, `GITHUB_TOKEN` (wisp-widgets/wisp-mac va wisp-windows'ni o'qiy oladigan),
+Lemon Squeezy'da har bir mahsulot: Confirmation modal va Email receipt → button link yuqoridagi `/download` havolasi.
+
+Env (Vercel): `LEMONSQUEEZY_API_KEY`, `GITHUB_TOKEN` (wisp-widgets/wisp-mac va wisp-windows: Contents read-only),
 `PRODUCT_MAC_ID`, `PRODUCT_WINDOWS_ID`, ixtiyoriy `LEMONSQUEEZY_STORE_ID`.
 
 Narx: launch paytida mahsulot narxi $5, `launchEndsAt` dan keyin Lemon Squeezy'da $10.90 ga o'zgartiriladi.

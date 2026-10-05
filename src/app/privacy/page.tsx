@@ -28,6 +28,12 @@ export default function Privacy() {
         details so we can deliver Wisp, unlock updates and help you. We don&apos;t see your card number.
       </p>
 
+      <h2>Downloading</h2>
+      <p>
+        The Download button in your receipt opens a link on this site with your order number. Our server checks with
+        Lemon Squeezy that the order is paid, then sends you to the file.
+      </p>
+
       <h2>Your purchase email and updates</h2>
       <p>
         To check for updates, the app sends the email you bought Wisp with to our server. The server asks Lemon Squeezy

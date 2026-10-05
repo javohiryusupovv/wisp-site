@@ -8,7 +8,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "How do I get Wisp after paying?",
-    a: "Right after payment you get an email with a download link. The same link is on the order page linked in your receipt, so you can download again any time.",
+    a: "Right after payment you get a receipt email with a Download button. It always gives you the latest version, so keep the email to download again on another computer. No GitHub or other account needed.",
   },
   {
     q: "Is there a Windows version?",
