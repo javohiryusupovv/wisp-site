@@ -69,8 +69,9 @@ export function PlatformNote() {
     return (
       <div className="platform-note win" role="note">
         <p>
-          <b>Wisp for Windows 10 and 11</b> has now playing, the timer, prayer times, clipboard history, volume,
-          brightness and battery. Telegram messages, the file shelf and Liquid Glass are Mac-only for now.
+          <b>Wisp for Windows 10 and 11</b> has now playing, Telegram unread alerts, the file shelf, timer, prayer
+          times, clipboard history, quick controls and a volume indicator, at the top or on either edge of any display.
+          Telegram message text, the live YouTube cover and Liquid Glass are Mac-only for now.
         </p>
         <p className="small">
           It&apos;s a single Wisp.exe that installs itself. If Windows says the app is from an unknown publisher, choose

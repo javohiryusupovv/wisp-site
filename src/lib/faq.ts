@@ -8,7 +8,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "Is there a Windows version?",
-    a: "Yes, for Windows 10 and 11. It has now playing, the timer, prayer times, clipboard history, volume, brightness and battery at the top of the screen. Telegram messages, the file shelf and Liquid Glass are Mac-only for now.",
+    a: "Yes, for Windows 10 and 11. It has now playing, Telegram unread alerts, the file shelf, timer, prayer times, clipboard history, quick controls and a volume indicator, at the top or on either edge of any display. Windows doesn't let apps read notification text, so Telegram shows the unread count instead of the message. The live YouTube cover and Liquid Glass are Mac-only for now.",
   },
   {
     q: "Which macOS versions are supported?",

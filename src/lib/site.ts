@@ -27,7 +27,7 @@ export const site = {
   // TODO: checkout link (Gumroad / Lemon Squeezy / Paddle). Update the product price there on the same date.
   checkoutUrl: "https://github.com/javohiryusupovv/wisp/releases/latest",
 
-  version: "1.0.5",
+  version: "1.0.6",
 
   // Stable names: release.sh uploads these with every release.
   downloads: {

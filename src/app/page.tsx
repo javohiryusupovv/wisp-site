@@ -42,7 +42,7 @@ const screenModes = [
 const specs = [
   { k: "Price", v: `${money(site.launchPrice)} until ${launchEnds.toLocaleDateString("en-US", { month: "long", day: "numeric", timeZone: "Asia/Tashkent" })}, then ${money(site.regularPrice)}. Pay once, every 1.x update included.` },
   { k: "Requirements", v: "macOS 14 Sonoma or later" },
-  { k: "Windows", v: "Windows 10 (2004 or later) and 11, x64. Now playing, timer, prayer times, clipboard history, volume, brightness and battery. Telegram, file shelf and Liquid Glass are Mac-only for now." },
+  { k: "Windows", v: "Windows 10 (2004 or later) and 11, x64. Now playing, Telegram unread count and alerts, file shelf, timer, prayer times for your location, clipboard history with images and files, quick controls and a volume indicator. Top, left or right edge on any display. Telegram message text, the live YouTube cover and Liquid Glass are Mac-only for now." },
   { k: "Processor", v: "Apple Silicon and Intel (universal app)" },
   { k: "Download", v: "Mac: 3.7 MB disk image, signed. Windows: 63 MB zip with a single Wisp.exe" },
   { k: "Displays", v: "MacBook notch and any external monitor. At the top, or on the left or right edge." },
