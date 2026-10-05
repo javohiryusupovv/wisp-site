@@ -30,7 +30,7 @@ export const site = {
     windows: "#pricing",
   },
 
-  version: "1.0.6",
+  version: "1.0.7",
 
   // Buyers get access through private GitHub repos (invite sent by /api/lemonsqueezy after payment).
   github: {
