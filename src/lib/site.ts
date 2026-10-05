@@ -1,0 +1,42 @@
+// Everything you need to edit before launch lives here.
+export const site = {
+  name: "Wisp",
+  // Set NEXT_PUBLIC_SITE_URL in your hosting env (e.g. https://wisp.app). Used for canonical, OG, sitemap.
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, ""),
+  title: "Wisp — Dynamic Island for your Mac's notch",
+  tagline: "Your notch, finally useful.",
+  description:
+    "Wisp turns the notch on your MacBook into a live island for music, Telegram messages, timers, clipboard history and quick controls. Native Swift, macOS 14+, pay once.",
+  keywords: [
+    "Dynamic Island for Mac",
+    "MacBook notch app",
+    "notch widget",
+    "macOS notch",
+    "now playing menu bar",
+    "Spotify notch",
+    "Telegram notifications Mac",
+    "clipboard history Mac",
+    "macOS volume HUD",
+  ],
+
+  // Launch pricing: launchPrice until launchEndsAt (one fixed date for everyone), then regularPrice.
+  launchPrice: 5,
+  regularPrice: 10.9,
+  launchEndsAt: "2026-10-15T23:59:59+05:00", // Tashkent time
+  currency: "USD",
+  // TODO: checkout link (Gumroad / Lemon Squeezy / Paddle). Update the product price there on the same date.
+  checkoutUrl: "https://github.com/javohiryusupovv/wisp/releases/latest",
+
+  version: "1.0.3",
+  minMacOS: "14.0",
+
+  // TODO: your X handle (without @) and contact email
+  xHandle: "",
+  email: "hello@example.com",
+} as const;
+
+export const money = (n: number) => `$${Number.isInteger(n) ? n : n.toFixed(2)}`;
+export const launchEnds = new Date(site.launchEndsAt);
+export const isLaunch = (now: number = Date.now()) => now < launchEnds.getTime();
+/** Time of this render (build/revalidation on the server). */
+export const renderTime = () => Date.now();

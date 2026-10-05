@@ -1,0 +1,1 @@
+Wisp — a Dynamic Island for your Mac. The notch shows what's playing in Spotify.
