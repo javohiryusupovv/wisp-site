@@ -24,8 +24,11 @@ export const site = {
   regularPrice: 10.9,
   launchEndsAt: "2026-10-15T23:59:59+05:00", // Tashkent time
   currency: "USD",
-  // TODO: checkout link (Gumroad / Lemon Squeezy / Paddle). Update the product price there on the same date.
-  checkoutUrl: "https://github.com/javohiryusupovv/wisp/releases/latest",
+  // TODO: Lemon Squeezy checkout links, one product per platform (add ?checkout[discount_code]=LAUNCH for the launch price).
+  checkout: {
+    mac: "#pricing",
+    windows: "#pricing",
+  },
 
   version: "1.0.6",
 

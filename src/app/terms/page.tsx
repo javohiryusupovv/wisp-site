@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 
 export default function Terms() {
   const limit: number = site.activationLimit;
-  const macs = limit === 1 ? "one Mac" : `up to ${limit} Macs`;
+  const macs = limit === 1 ? "one computer" : `up to ${limit} computers`;
   return (
     <LegalPage title="Terms of service">
       <p>
-        These terms apply when you buy or use Wisp, the macOS app, and this website. By buying or using Wisp you agree to
+        These terms apply when you buy or use Wisp for Mac or Wisp for Windows, and this website. By buying or using Wisp you agree to
         them.
       </p>
 
@@ -28,9 +28,9 @@ export default function Terms() {
 
       <h2>Your license</h2>
       <ul>
-        <li>One purchase gives you a personal license to use Wisp on {macs} that you own or use.</li>
+        <li>Wisp for Mac and Wisp for Windows are sold separately. Each purchase gives you a personal license for that version on {macs} that you own or use.</li>
         <li>The license doesn&apos;t expire. Every 1.x update is included.</li>
-        <li>You get a license key with your receipt. Wisp asks for it once, on each Mac.</li>
+        <li>You get a license key with your receipt. Wisp asks for it once on each computer.</li>
         <li>Don&apos;t share, resell or publish your license key, and don&apos;t redistribute the app.</li>
         <li>Don&apos;t modify Wisp or work around its license check.</li>
       </ul>
@@ -42,8 +42,9 @@ export default function Terms() {
 
       <h2>Requirements</h2>
       <p>
-        Wisp needs macOS {site.minMacOS.replace(/\.0$/, "")} or later. Some features need permissions you grant in System
-        Settings. Each one is optional and unlocks one feature.
+        Wisp for Mac needs macOS {site.minMacOS.replace(/\.0$/, "")} or later. Wisp for Windows needs Windows 10 (version
+        2004 or later) or Windows 11, 64-bit. Some features need permissions you grant in the system settings. Each one
+        is optional and unlocks one feature.
       </p>
 
       <h2>Prayer times</h2>
@@ -55,7 +56,7 @@ export default function Terms() {
       <h2>No warranty</h2>
       <p>
         Wisp is provided &quot;as is&quot;. We work to keep it reliable, but we can&apos;t promise it will be free of bugs or work
-        with every app, browser or future version of macOS.
+        with every app, browser or future version of macOS or Windows.
       </p>
 
       <h2>Liability</h2>

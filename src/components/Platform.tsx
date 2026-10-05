@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useSyncExternalStore, type ReactNode } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { site } from "@/lib/site";
-import { ArrowUpIcon, WindowsIcon } from "./icons";
+import { AppleIcon, ArrowUpIcon, WindowsIcon } from "./icons";
+import { Price } from "./Launch";
 
 type Platform = "mac" | "windows" | "mobile" | "other";
 
@@ -36,27 +37,36 @@ export function NotchHint() {
 }
 
 /**
- * The hero / closing call to action. Mac visitors (and the server render) get the Mac button passed in;
- * Windows visitors get the Windows download instead.
+ * Two buy buttons, Mac and Windows. The visitor's own platform comes first and gets the primary style;
+ * the server render (and phones) lead with Mac.
  */
-export function PlatformCTA({ mac }: { mac: ReactNode }) {
+export function BuyButtons({ serverNow, onDark = false }: { serverNow: number; onDark?: boolean }) {
   const platform = usePlatform();
-  if (platform !== "windows") return <>{mac}</>;
-  return (
-    <a className="btn btn-primary" href={site.downloads.windows}>
-      <WindowsIcon />
-      Download for Windows
+  const windowsFirst = platform === "windows";
+  const mac = (primary: boolean) => (
+    <a key="mac" className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={site.checkout.mac}>
+      <AppleIcon />
+      Get Wisp for Mac {primary && <Price serverNow={serverNow} />}
     </a>
+  );
+  const win = (primary: boolean) => (
+    <a key="win" className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={site.checkout.windows}>
+      <WindowsIcon />
+      Get Wisp for Windows {primary && <Price serverNow={serverNow} />}
+    </a>
+  );
+  return (
+    <div className={`ctas buy-pair${onDark ? " on-dark" : ""}`}>
+      {windowsFirst ? [win(true), mac(false)] : [mac(true), win(false)]}
+    </div>
   );
 }
 
-/** Small line under the hero buttons for Mac visitors who already bought. */
-export function MacDownloadLink() {
-  const platform = usePlatform();
-  if (platform !== "mac") return null;
+/** Small line under the buy buttons for people who already bought. */
+export function DownloadLinks() {
   return (
     <p className="dl-link">
-      Already bought? <a href={site.downloads.mac}>Download for Mac</a>
+      Already bought? Download for <a href={site.downloads.mac}>Mac</a> or <a href={site.downloads.windows}>Windows</a>
     </p>
   );
 }

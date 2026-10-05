@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, FloatBar, Reveal } from "@/components/Client";
-import { LaunchPill, Price, PriceBlock } from "@/components/Launch";
+import { LaunchPill, PriceBlock } from "@/components/Launch";
 import { ClipboardTab, ControlsTab, LiveTimer, ShelfTab, Notch, NotchProvider, NotchSwitch, OpenTab, PrayerShowcase, TelegramBubble, VideoCover } from "@/components/Notch";
 import { SunMax, TelegramLogo, YouTubeLogo } from "@/components/sf";
 import { MonitorDemo } from "@/components/Monitor";
-import { MacDownloadLink, NotchHint, PlatformCTA, PlatformNote } from "@/components/Platform";
-import { AppleIcon, BoltIcon, CheckIcon, Eq } from "@/components/icons";
+import { BuyButtons, DownloadLinks, NotchHint, PlatformNote } from "@/components/Platform";
+import { BoltIcon, CheckIcon, Eq } from "@/components/icons";
 import { faq } from "@/lib/faq";
 import { isLaunch, launchEnds, money, renderTime, site } from "@/lib/site";
 
@@ -84,7 +84,7 @@ function JsonLd({ now }: { now: number }) {
         url: site.url,
         image: `${site.url}/opengraph-image.png`,
         applicationCategory: "UtilitiesApplication",
-        operatingSystem: `macOS ${site.minMacOS} or later`,
+        operatingSystem: `macOS ${site.minMacOS} or later, Windows 10 or 11`,
         softwareVersion: site.version,
         offers: {
           "@type": "Offer",
@@ -115,7 +115,6 @@ function JsonLd({ now }: { now: number }) {
 
 export default function Home() {
   const now = renderTime();
-  const buy = site.checkoutUrl;
 
   return (
     <NotchProvider serverNow={now}>
@@ -155,19 +154,9 @@ export default function Home() {
               Wisp turns the black cutout on your MacBook into a live island for what&apos;s playing, who&apos;s
               messaging, and what&apos;s ticking. It stays out of the way until you need it.
             </p>
-            <div className="ctas">
-              <PlatformCTA
-                mac={
-                  <a className="btn btn-primary" href={buy}>
-                    <AppleIcon />
-                    Get Wisp for Mac <Price serverNow={now} />
-                  </a>
-                }
-              />
-              <a className="btn btn-ghost" href="#features">See what it does</a>
-            </div>
-            <MacDownloadLink />
-            <p className="meta">macOS 14+ · Apple Silicon &amp; Intel · Works on Macs without a notch · Also on Windows</p>
+            <BuyButtons serverNow={now} />
+            <DownloadLinks />
+            <p className="meta">macOS 14+ · Windows 10 and 11 · Works on screens without a notch</p>
             <PlatformNote />
             <NotchHint />
             <NotchSwitch />
@@ -339,7 +328,7 @@ export default function Home() {
               <div className="glow" />
               <div className="l" style={{ position: "relative" }}>
                 <PriceBlock serverNow={now} />
-                <a className="btn btn-primary" href={buy}>Get Wisp for Mac</a>
+                <BuyButtons serverNow={now} onDark />
               </div>
               <div className="r" style={{ position: "relative" }}>
                 <ul className="incl">
@@ -373,9 +362,7 @@ export default function Home() {
           <div className="finale rv">
             <Image className="logo" src="/brand/wisp-logo.png" alt="Wisp logo" width={1683} height={725} />
             <h2>Give your notch something to do.</h2>
-            <div className="ctas">
-              <PlatformCTA mac={<a className="btn btn-primary" href={buy}>Get Wisp for Mac <Price serverNow={now} /></a>} />
-            </div>
+            <BuyButtons serverNow={now} onDark />
           </div>
           <div className="foot">
             <span>© 2026 Wisp · Made in Uzbekistan</span>
