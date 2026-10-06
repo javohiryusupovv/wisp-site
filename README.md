@@ -13,7 +13,7 @@ npm run build
 Hammasi `src/lib/site.ts` da:
 
 - `checkoutUrl` — to'lov havolasi (Gumroad / Lemon Squeezy / Paddle)
-- `regularPrice` / `launchPrice` / `launchSpots` / `discountCode` — launch: birinchi 20 xaridorga -50% (Lemon Squeezy'dagi `LAUNCH` kodi, 20 ta redemption bilan cheklangan). Joylar tugagach sayt o'zi oddiy narxni ko'rsatadi
+- `regularPrice` / `launchPrice` / `discountCode` / `launchEndsAt` — launch: hammaga -50% `launchEndsAt` gacha (Lemon Squeezy'dagi `LAUNCH` kodi, o'sha vaqtda tugaydi). Keyin sayt o'zi oddiy narxni ko'rsatadi
   (to'lov tizimidagi narxni o'sha kuni o'zingiz o'zgartirasiz)
 - `xHandle`, `email`
 
@@ -43,4 +43,4 @@ Lemon Squeezy'da har bir mahsulot: Confirmation modal va Email receipt → butto
 Env (Vercel): `LEMONSQUEEZY_API_KEY`, `GITHUB_TOKEN` (wisp-widgets/wisp-mac va wisp-windows: Contents read-only),
 `PRODUCT_MAC_ID`, `PRODUCT_WINDOWS_ID`, ixtiyoriy `LEMONSQUEEZY_STORE_ID`.
 
-Narx: $9.99. Launch: `LAUNCH` kodi (-50%, 20 ta, 15-oktabr 23:59 Toshkentgacha — qaysi biri oldin) Buy havolasiga avtomatik qo'shiladi → $4.99. Qolgan joylar: `GET /api/launch`.
+Narx: $9.99. Launch: `LAUNCH` kodi (-50%, 15-oktabr 23:59 Toshkentgacha) Buy havolasiga avtomatik qo'shiladi → $4.99.

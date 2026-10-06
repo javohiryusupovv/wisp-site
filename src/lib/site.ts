@@ -19,12 +19,10 @@ export const site = {
     "macOS volume HUD",
   ],
 
-  // Launch: half price for the first `launchSpots` buyers until `launchEndsAt`, whichever comes first, via the
-  // Lemon Squeezy discount `discountCode` (limited to that many redemptions, expiring then). /api/launch reports
-  // how many are left; the discount's own expiry in Lemon Squeezy wins over `launchEndsAt`.
+  // Launch: half price for everyone until `launchEndsAt`, via the Lemon Squeezy discount `discountCode`
+  // (which expires at the same moment). After that the site shows the regular price.
   regularPrice: 9.99,
   launchPrice: 4.99, // what Lemon Squeezy charges with the code: $9.99 − 50% = $4.99
-  launchSpots: 20,
   discountCode: "LAUNCH",
   launchEndsAt: "2026-10-15T23:59:00+05:00", // Tashkent (= 18:59 UTC, the discount's expiry)
   currency: "USD",
@@ -51,6 +49,6 @@ export const money = (n: number) => `$${Number.isInteger(n) ? n : n.toFixed(2)}`
 /** Time of this render (build/revalidation on the server). */
 export const renderTime = () => Date.now();
 
-/** Checkout link, with the launch code attached while spots are left. */
+/** Checkout link, with the launch code attached until the launch ends. */
 export const checkoutUrl = (product: "mac" | "windows", launch: boolean) =>
   launch ? `${site.checkout[product]}?checkout[discount_code]=${site.discountCode}` : site.checkout[product];

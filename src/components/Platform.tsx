@@ -3,7 +3,7 @@
 import { useState, useSyncExternalStore } from "react";
 import { checkoutUrl } from "@/lib/site";
 import { AppleIcon, ArrowUpIcon, WindowsIcon } from "./icons";
-import { Price, useLaunch } from "./Launch";
+import { Price, useLaunchActive } from "./Launch";
 
 type Platform = "mac" | "windows" | "mobile" | "other";
 
@@ -42,7 +42,7 @@ export function NotchHint() {
  */
 export function BuyButtons({ onDark = false, compact = false }: { onDark?: boolean; compact?: boolean }) {
   const platform = usePlatform();
-  const { active } = useLaunch();
+  const active = useLaunchActive();
   const windowsFirst = platform === "windows";
   const button = (product: "mac" | "windows", primary: boolean) => (
     <a key={product} className={`btn ${primary ? "btn-primary" : "btn-ghost"}`} href={checkoutUrl(product, active)}

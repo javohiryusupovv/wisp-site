@@ -40,7 +40,7 @@ const screenModes = [
 ];
 
 const specs = [
-  { k: "Price", v: `${money(site.regularPrice)}, pay once. Launch: 50% off (${money(site.launchPrice)}) for the first ${site.launchSpots} buyers until ${new Date(site.launchEndsAt).toLocaleDateString("en-US", { month: "long", day: "numeric", timeZone: "Asia/Tashkent" })}. Every 1.x update included.` },
+  { k: "Price", v: `${money(site.regularPrice)}, pay once. Launch: 50% off (${money(site.launchPrice)}) until ${new Date(site.launchEndsAt).toLocaleDateString("en-US", { month: "long", day: "numeric", timeZone: "Asia/Tashkent" })}. Every 1.x update included.` },
   { k: "Requirements", v: "macOS 14 Sonoma or later" },
   { k: "Windows", v: "Windows 10 (2004 or later) and 11, x64. Now playing, Telegram unread count and alerts, file shelf, timer, prayer times for your location, clipboard history with images and files, quick controls and a volume indicator. Top, left or right edge on any display. Telegram message text, the live YouTube cover and Liquid Glass are Mac-only for now." },
   { k: "Processor", v: "Apple Silicon and Intel (universal app)" },

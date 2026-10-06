@@ -1,41 +1,38 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 import { money, site } from "@/lib/site";
 
-/** Launch offer state from /api/launch. `remaining: null` = not known yet (server render, or Lemon Squeezy unreachable). */
-export type Launch = { active: boolean; total: number; remaining: number | null; endsAt: string };
+const endsAt = new Date(site.launchEndsAt).getTime();
+const endLabel = new Date(site.launchEndsAt).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "Asia/Tashkent" });
+const pad = (n: number) => String(n).padStart(2, "0");
 
-const ended = (endsAt: string) => Date.now() >= new Date(endsAt).getTime();
-const initial: Launch = { active: true, total: site.launchSpots, remaining: null, endsAt: site.launchEndsAt };
-// In the browser, a page cached from before the deadline still flips to the regular price right away.
-let state: Launch = typeof window !== "undefined" && ended(initial.endsAt) ? { ...initial, active: false } : initial;
-let started = false;
-const listeners = new Set<() => void>();
-
-function subscribe(fn: () => void) {
-  listeners.add(fn);
-  if (!started) {
-    started = true;
-    fetch("/api/launch")
-      .then((r) => r.json())
-      .then((s: Launch) => {
-        state = { ...s, active: s.active && !ended(s.endsAt) };
-        listeners.forEach((l) => l());
-      })
-      .catch(() => {});
-  }
-  return () => {
-    listeners.delete(fn);
-  };
+/** Current time in the browser, ticking every `every` ms; `null` on the server and during hydration. */
+function useClock(every: number) {
+  const subscribe = useCallback(
+    (tick: () => void) => {
+      const id = window.setInterval(tick, every);
+      return () => window.clearInterval(id);
+    },
+    [every],
+  );
+  return useSyncExternalStore<number | null>(subscribe, () => Math.floor(Date.now() / every) * every, () => null);
 }
 
-/** Shared across every price on the page; fetched once. */
-export const useLaunch = () => useSyncExternalStore(subscribe, () => state, () => initial);
+/** Is the launch discount still on? Assumed yes until the browser knows the time. */
+export function useLaunchActive() {
+  const now = useClock(30_000);
+  return now === null || now < endsAt;
+}
+
+function left(now: number) {
+  const s = Math.max(0, Math.floor((endsAt - now) / 1000));
+  return { d: Math.floor(s / 86400), h: Math.floor((s % 86400) / 3600), m: Math.floor((s % 3600) / 60), s: s % 60 };
+}
 
 /** "$4.99 $9.99" during the launch, "$9.99" after. */
 export function Price() {
-  const { active } = useLaunch();
+  const active = useLaunchActive();
   if (!active) return <span className="price">{money(site.regularPrice)}</span>;
   return (
     <span className="price">
@@ -44,28 +41,29 @@ export function Price() {
   );
 }
 
-const left = (l: Launch) => (l.remaining === null ? `${l.total} spots` : `${l.remaining} of ${l.total} left`);
-const endLabel = (l: Launch) =>
-  new Date(l.endsAt).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "Asia/Tashkent" });
-
-/** Pill above the headline. Hidden once the spots are gone or the launch ends. */
+/** Pill above the headline. Hidden once the launch ends. */
 export function LaunchPill() {
-  const l = useLaunch();
-  if (!l.active) return null;
+  const now = useClock(30_000);
+  if (now !== null && now >= endsAt) return null;
+  const t = now === null ? null : left(now);
   return (
     <a className="launch-pill" href="#pricing">
       <span className="dot" aria-hidden="true" />
-      Launch: half price for the first {l.total} buyers, until {endLabel(l)}
-      <span className="sep" aria-hidden="true">·</span>
-      <span className="mono">{left(l)}</span>
+      Launch: 50% off until {endLabel}
+      {t && (
+        <>
+          <span className="sep" aria-hidden="true">·</span>
+          <span className="mono">{t.d > 0 ? `${t.d}d ${t.h}h left` : `${t.h}h ${t.m}m left`}</span>
+        </>
+      )}
     </a>
   );
 }
 
-/** Big price block in the pricing card, with a meter of the launch spots. */
+/** Big price block in the pricing card, with a live countdown to the end of the launch. */
 export function PriceBlock() {
-  const l = useLaunch();
-  if (!l.active) {
+  const now = useClock(1000);
+  if (now !== null && now >= endsAt) {
     return (
       <>
         <div className="amount">{money(site.regularPrice)}<small>one-time</small></div>
@@ -73,7 +71,10 @@ export function PriceBlock() {
       </>
     );
   }
-  const taken = l.remaining === null ? 0 : l.total - l.remaining;
+  const t = now === null ? null : left(now);
+  const cell = (v: number | undefined, label: string, padded = true) => (
+    <span><b>{v === undefined ? "–" : padded ? pad(v) : v}</b>{label}</span>
+  );
   return (
     <>
       <p className="launch-tag">Launch · 50% off</p>
@@ -82,14 +83,14 @@ export function PriceBlock() {
         <small><s>{money(site.regularPrice)}</s> one-time</small>
       </div>
       <p className="note">
-        Half price for the first {l.total} buyers until {endLabel(l)}, then {money(site.regularPrice)}. No subscription and
-        no account. Every 1.x update is included, with a {site.refundDays}-day money-back guarantee.
+        Half price until {endLabel}, then {money(site.regularPrice)}. No subscription and no account. Every 1.x update is
+        included, with a {site.refundDays}-day money-back guarantee.
       </p>
-      <div className="spots" role="img" aria-label={l.remaining === null ? `${l.total} launch spots` : `${l.remaining} of ${l.total} launch spots left`}>
-        <div className="cells" aria-hidden="true">
-          {Array.from({ length: l.total }, (_, i) => <i key={i} className={i < taken ? "taken" : ""} />)}
-        </div>
-        <span className="mono">{left(l)} · ends {endLabel(l)}</span>
+      <div className="countdown" role="timer" aria-label={t ? `${t.d} days ${t.h} hours ${t.m} minutes left at the launch price` : `Launch price until ${endLabel}`}>
+        {cell(t?.d, "days", false)}
+        {cell(t?.h, "hours")}
+        {cell(t?.m, "min")}
+        {cell(t?.s, "sec")}
       </div>
     </>
   );
