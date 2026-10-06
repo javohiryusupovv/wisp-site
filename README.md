@@ -43,4 +43,4 @@ Lemon Squeezy'da har bir mahsulot: Confirmation modal va Email receipt → butto
 Env (Vercel): `LEMONSQUEEZY_API_KEY`, `GITHUB_TOKEN` (wisp-widgets/wisp-mac va wisp-windows: Contents read-only),
 `PRODUCT_MAC_ID`, `PRODUCT_WINDOWS_ID`, ixtiyoriy `LEMONSQUEEZY_STORE_ID`.
 
-Narx: $9.99. Launch: `LAUNCH` kodi (-50%, 20 ta) Buy havolasiga avtomatik qo'shiladi → $4.99. Qolgan joylar: `GET /api/launch`.
+Narx: $9.99. Launch: `LAUNCH` kodi (-50%, 20 ta, 15-oktabr 23:59 Toshkentgacha — qaysi biri oldin) Buy havolasiga avtomatik qo'shiladi → $4.99. Qolgan joylar: `GET /api/launch`.
