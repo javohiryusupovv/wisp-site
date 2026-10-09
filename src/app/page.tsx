@@ -155,6 +155,20 @@ export default function Home() {
             <BuyButtons />
             <DownloadLinks />
             <p className="meta">macOS 14+ · Windows 10 and 11 · Works on screens without a notch</p>
+            <a
+              className="ph-badge"
+              href="https://www.producthunt.com/products/wisp-7?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-wisp-7"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element -- Product Hunt's live SVG badge */}
+              <img
+                alt="Wisp - Dynamic Island for Mac & Windows: music, Telegram, prayer | Product Hunt"
+                width={250}
+                height={54}
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1270457&theme=light&t=1791523648416"
+              />
+            </a>
             <PlatformNote />
             <NotchHint />
             <NotchSwitch />
