@@ -28,8 +28,8 @@ export const site = {
   currency: "USD",
   // Lemon Squeezy checkout links ("Share" on each product).
   checkout: {
-    mac: "https://wispapp.lemonsqueezy.com/checkout/buy/242c6429-d2b0-486a-8438-c48e5bb31813",
-    windows: "https://wispapp.lemonsqueezy.com/checkout/buy/1f3debbd-3a21-4a4e-8404-b1dcdfb407f6",
+    mac: "https://wispapp.lemonsqueezy.com/checkout/buy/521b3d64-4c6d-4493-98be-ec1ed83fe641",
+    windows: "https://wispapp.lemonsqueezy.com/checkout/buy/d204020c-e052-4a56-85a6-af7324fc4375",
   },
 
   version: "1.0.8",
